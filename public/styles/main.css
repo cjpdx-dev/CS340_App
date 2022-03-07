@@ -1,0 +1,208 @@
+/* 
+main.css
+Developed By: Chris Jacobs 
+CS 340 - Winter 2022 
+Oregon State University
+*/
+
+h1 {
+	text-align: center;
+	margin: 1%;
+}
+
+h2 {
+	text-align: center;
+	margin: 1%;
+	text-decoration: underline;
+}
+
+h3 {
+	margin: 1%;
+}
+
+h5 {
+	display: inline;
+}
+
+nav {
+	text-align: center;
+	margin: 1%;
+}
+
+nav li {
+	display: inline;
+}
+
+main {
+	margin: 1%;
+}
+
+.form-wrapper {
+	border: 2px solid black;
+	margin: 1%;
+	padding: 1%;
+}
+
+.sub-form-seperator {
+	border-top: 2px solid black;
+}
+
+.insert-row-form {
+    padding-bottom: 1%;
+}
+
+.insert-row-status-alert {
+    display: auto;
+}
+
+.search-by-form {
+	padding-bottom: 1%;
+}
+
+.search-sort-options {
+    margin-top: 1%;
+	margin-bottom: 1%;
+}
+
+.query-output-table {
+    margin-top: 1%;
+    border-collapse: collapse;
+	border-spacing: 0;
+	width: 100%;
+	border:1px solid black;
+}
+
+.query-output-table caption {
+	text-align: left;
+	padding-bottom:  1%;
+}
+
+.query-output-table thead {
+    padding-bottom: 1%;
+}
+
+.query-output-table tr {
+    margin-bottom: 1%;
+}
+
+.query-output-table td {
+    border:1px solid black;
+	text-align: center;
+}
+
+.query-update-options {
+	padding-bottom: 1%;
+	padding-top:  1%;
+}
+
+.query-update-form {
+	display:  auto;
+}
+
+.query-update-form button {
+	width: 66%;
+	text-align: center;
+	margin-top:  1%;
+	margin-bottom: 1%;
+}
+
+
+/* Customers */
+
+
+
+/* Transactions */
+
+
+
+/* Pay Methods */
+
+
+
+/* CSS Order Classes */
+
+.order-options {
+    display: auto;
+}
+
+.order-edit-status-form {
+    display: auto;
+}
+
+.order-status-selector {
+	width: 66%;
+	text-align: center;
+}
+
+.order-edit-items-button {
+	width: 66%;
+	text-align: center;
+}
+
+.order-edit-shipments-button {
+	width: 66%;
+	text-align: center;
+}
+
+.order-delete-button {
+	width: 66%;
+	text-align: center;
+	color: red;
+}
+
+
+
+/* Order Items */
+
+.orderitem-item-selector {
+	display: inline;
+	width: 20%;
+}
+
+.orderitem-item-qty-input {
+	display: inline;
+	width: 7.5%;
+}
+
+
+
+/* Shipment & Shipment Items */
+
+.shipment-details {
+	display: inline;
+}
+
+.shipment-details h4 {
+	display: inline;
+	padding-right:  1%;
+}
+
+.shipment-details label {
+	display: inline;
+}
+
+.shipment-details output {
+	display: inline;
+	padding-right:  2%;
+}
+
+.save-shipment-changes {
+	float: right;
+	margin-right:  2.75%;
+	margin-top:  1%;
+}
+
+.add-item-to-shipment-wrapper {
+	padding-bottom: 1%;
+}
+
+.button-add-empty-shipment {
+	margin-top:  1%;
+}
+
+
+
+/* Products */
+
+
+/* Item Prices */

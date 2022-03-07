@@ -2,7 +2,7 @@
   "name": "cs340_app",
   "version": "1.0.0",
   "description": "portfolio project for cs340",
-  "main": "app.js",
+  "main": "app.mjs",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -17,8 +17,11 @@
   },
   "homepage": "https://github.com/cjpdx-dev/CS340_App#readme",
   "dependencies": {
+    "body-parser": "^1.19.2",
     "express": "^4.17.3",
+    "express-handlebars": "^6.0.3",
     "forever": "^4.0.3",
+    "handlebars": "^4.7.7",
     "mysql": "^2.18.1"
   }
 }
