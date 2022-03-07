@@ -1,5 +1,6 @@
 <!doctype html>
 <html>
+
 <head>
 	<title>Cook Nooks</title>
     <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
@@ -7,7 +8,39 @@
     <script src="/static/{{this}}"></script>
     {{/each}}
 </head>
+
 <body>
+    <h1>CookNooks: Database Interface</h1>
+
+    <nav>
+      <ul>
+        <li> <a href="index.html"> Home Page </a> </li>
+        |
+        <li> <a href="/Customers">Customers</a> </li>
+        |
+        <li> <a href="/Addresses">Addresses</a> </li>
+        |
+        <li> <a href="/CustomerAddresses"> Customer Addresses </a></li>
+        |
+        <li> <a href="/Orders"> Orders </a> </li>
+        |
+        <li> <a href="/OrderItems"> Order Items </a></li>
+        |
+        <li> <a href="/Shipments"> Shipments </a> </li>
+        |
+        <li> <a href="/Products"> Products </a> </li>
+        |
+        <li> <a href="/ProductPrices"> Product Prices </a> </li>
+        |
+        <li> <a href="/Transactions"> Transactions </a> </li>
+        |
+        <li> <a href="/PayMethods"> Pay Methods </a> </li>
+        |
+        <li> <a href="/CustomerPayMethods"> Customer Pay Methods </a></li>
+    </ul>
+    </nav>
+    
 	{{{body}}}
 </body>
+
 </html>
