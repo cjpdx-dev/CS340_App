@@ -15,7 +15,6 @@ module.exports = function() {
     }
 
     router.get('/', function(req, res) {
-        let callbackCount = 0;
         let context = {};
         context.jsscripts = ['search_customers.js'];
         let mysql = req.app.get('mysql');
@@ -24,6 +23,12 @@ module.exports = function() {
             res.render('Customers', context)
         }
     })
+
+    router.get('/', function(req, res) {
+        let mysql = req.app.get('mysql');
+        let sql = "INSERT INTO Customers (first_name, last_name, "
+    })
+
 
     return router;
 }();

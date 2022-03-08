@@ -1,138 +1,127 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Customers</title>
-    <link rel="stylesheet" href="styles/main.css" />
-  </head>
 
-  <body>
+  <h2>Customers</h2>
 
-    <main>
-      
-      <h2>Customers</h2>
+    <h3>Create New Customer</h3>
 
-        <h3>Create New Customer</h3>
+    <div class="form-wrapper">
 
-        <div class="form-wrapper">
+      <form class="insert-row-form" >
 
-          <form class="insert-row-form" >
+        <label for="fname">*First Name</label> 
+        <br>
+        <input type="text" id="fname" name="fname"> 
+        <br>
+        <br>
 
-            <label for="fname">*First Name</label> 
-            <br>
-            <input type="text" id="fname" name="fname"> 
-            <br>
-            <br>
-
-            <label for="lname">*Last Name</label>
-            <br>
-            <input type="text" id="lname" name="lname"> 
-            <br>
-            <br>
-            
-            <label for="dob">*Date of Birth</label> 
-            <br>
-            <input type="text" id="dob" name="dob"> 
-            <br>
-            <br>
-            
-            <label for="email">*Email</label> 
-            <br>
-            <input type="text" id="email" name="email"> 
-            <br>
-            <br>
-            
-            <label for="email">Phone Number</label> <br>
-            <input type="text" id="email" name="email">
-
-            <br>
-            <br>
-
-            <input type="submit" value="Create Customer">
-
-          </form>
-        </div>
-
-        <h3>Customer Search</h3>
-
-        <div class="form-wrapper">
-
-          <h4> Search By Customer ID </h4>
-
-          <form class="search-by-form">
-            <input type="text" id="search_customer_id" name="search_customer_id" value="Customer ID">
-            <br>
-            <br>
-            <input type="submit" value="Search Customers">
-          </form>
-
-          <div class="sub-form-seperator">
-            
-          </div>
-
-          <h4> Search By Customer Name </h4>
-
-            <form class="search-by-form">
-
-              <label for="search_customer_fname"> First Name </label>
-              <br>
-              <input type="text" id="search_customer_fname" name="search_customer_fname" />
-
-              <br>
-              <br>
-
-              <label for="search_customer_lname"> Last Name </label>
-              <br>
-              <input type="text" id="search_customer_lname" name="search_customer_lname" />
-              <br>
-              <br>
-              <input type="submit" value="Search Customers">
+        <label for="lname">*Last Name</label>
+        <br>
+        <input type="text" id="lname" name="lname"> 
+        <br>
+        <br>
         
-            </form>
+        <label for="dob">*Date of Birth</label> 
+        <br>
+        <input type="text" id="dob" name="dob"> 
+        <br>
+        <br>
+        
+        <label for="email">*Email</label> 
+        <br>
+        <input type="text" id="email" name="email"> 
+        <br>
+        <br>
+        
+        <label for="email">Phone Number</label> <br>
+        <input type="text" id="email" name="email">
 
-          <h4> Search Results </h4>
+        <br>
+        <br>
 
-            <table class="query-output-table">
+        <input type="submit" value="Create Customer">
 
-              <thead>
-                <tr>
-                  <th>Customer ID</th>
-                  <th>First Name</th>
-                  <th>Last Name</th>
-                  <th>Email</th>
-                  <th>Date of Birth</th>
-                  <th>Cell Number</th>
-                  <th style="border:0;"> Options </th>
-                </tr>
-              
-              <tbody>
-                {{#each customers}}
-                <tr> 
-                    <td>{{customer_id}}</td> 
-                    <td>{{first_name}}</td> 
-                    <td>{{last_name}}</td> 
-                    <td>{{date_of_birth}}</td>
-                    <td>{{email_address}}</td>
-                    <td> n/a </td> 
-                    <td class="query-update-options" style="border:0;"> 
-                        <div class="query-update-form">
-                            <button> Create Order </button> 
-                            <!--
-                            <td><button onclick="deletePerson({{id}})">Delete</button></td>
-                            <td><a href="/people/{{id}}">Update</a></td>
-                            -->
-                            <button> View Orders </button>
-                            <button> View Payment Methods </button>
-                            <button> View Addresses </button>  
-                        </div>
-                    </td>
-                </tr>
-                {{/each}} 
-              </tbody>
-            </table>
+      </form>
+    </div>
 
-        </div>
-    </main>
-  </body>
+    <h3>Customer Search</h3>
+
+    <div class="form-wrapper">
+
+      <h4> Search By Customer ID </h4>
+
+      <form class="search-by-form">
+        <input type="text" id="search_customer_id" name="search_customer_id" value="Customer ID">
+        <br>
+        <br>
+        <input type="submit" value="Search Customers">
+      </form>
+
+      <div class="sub-form-seperator">
+        
+      </div>
+
+      <h4> Search By Customer Name </h4>
+
+        <form class="search-by-form">
+
+          <label for="search_customer_fname"> First Name </label>
+          <br>
+          <input type="text" id="search_customer_fname" name="search_customer_fname" />
+
+          <br>
+          <br>
+
+          <label for="search_customer_lname"> Last Name </label>
+          <br>
+          <input type="text" id="search_customer_lname" name="search_customer_lname" />
+          <br>
+          <br>
+          <input type="submit" value="Search Customers">
+    
+        </form>
+
+      <h4> Search Results </h4>
+
+        <table class="query-output-table">
+
+          <thead>
+            <tr>
+              <th>Customer ID</th>
+              <th>First Name</th>
+              <th>Last Name</th>
+              <th>Email</th>
+              <th>Date of Birth</th>
+              <th>Cell Number</th>
+              <th style="border:0;"> Options </th>
+            </tr>
+          
+          <tbody>
+            {{#each customers}}
+            <tr> 
+                <td>{{customer_id}}</td> 
+                <td>{{first_name}}</td> 
+                <td>{{last_name}}</td> 
+                <td>{{date_of_birth}}</td>
+                <td>{{email_address}}</td>
+                <td> n/a </td> 
+                <td class="query-update-options" style="border:0;"> 
+                    <div class="query-update-form">
+                        <button> Create Order </button> 
+                        <!--
+                        <td><button onclick="deletePerson({{id}})">Delete</button></td>
+                        <td><a href="/people/{{id}}">Update</a></td>
+                        -->
+                        <button> View Orders </button>
+                        <button> View Payment Methods </button>
+                        <button> View Addresses </button>  
+                    </div>
+                </td>
+            </tr>
+            {{/each}} 
+          </tbody>
+        </table>
+
+    </div>
+    
 </html>

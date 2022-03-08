@@ -1,0 +1,42 @@
+<html>
+
+ <h2> Customer Pay Methods </h2> 
+
+    <h3> View Pay Methods </h3>
+
+    <div class="form-wrapper">
+
+        <label for="customer-id-label">Customer ID</label>
+        <br>
+        <input type=text id="customer-id" name="customer-id" value="{{customer_id}}">
+        <br>
+
+        <table class="query-output-table">
+
+        <thead>
+            <tr>
+            <th>Payment ID</th>
+            <th>Address ID</th>
+            <th>Card Type</th>
+            <th>Last 4 Digits</th>
+            <th>Expiration Date</th>
+            </tr>
+        </thead>
+        
+        <tbody>
+            {{#each CustomerPayMethod}}
+                <tr> 
+                    <td> {{payment_id}} </td>
+                    <td> {{address_id}} </td> 
+                    <td> {{card_type}} </td>
+                    <td> {{last_four_digits}} </td>
+                    <td> {{expiration_date}}</td>
+                </tr>
+            {{/each}}
+        </tbody>
+        
+        </table>
+    
+    </div>
+    
+</html>

@@ -1,0 +1,183 @@
+ <html>
+ 
+ <h3>Create Payment Method</h3>
+
+    <div class='form-wrapper'>
+
+      <form>
+      
+        <label for="customerid">Customer ID</label>
+        <br>
+        <input type="text" id="customerid" name="customerid" required />
+        <br /><br />
+        <label for="fname">First Name</label>
+      
+        <br>
+
+        <input type="text" id="fname" name="fname" required /><br /><br />
+        <label for="lname">Last Name</label>
+        
+        <br>
+
+        <input type="text" id="lname" name="lname" required /><br /><br />
+        <label for="cardnum">Card Number</label>
+        
+        <br>
+
+        <input type="number" id="cardnum" name="cardnum" required /><br /><br />
+        <label for="expdate">Experation Date</label>
+        
+        <br>
+
+        <select id="expireMM" name="expireMM" required>
+          <option value="">Month</option>
+          <option value="01">January</option>
+          <option value="02">February</option>
+          <option value="03">March</option>
+          <option value="04">April</option>
+          <option value="05">May</option>
+          <option value="06">June</option>
+          <option value="07">July</option>
+          <option value="08">August</option>
+          <option value="09">September</option>
+          <option value="10">October</option>
+          <option value="11">November</option>
+          <option value="12">December</option>
+        </select>
+      
+        <select id="expireYY" name="expireYY" required>
+          <option value="">Year</option>
+          <option value="22">2022</option>
+          <option value="23">2023</option>
+          <option value="24">2024</option>
+          <option value="25">2025</option>
+          <option value="26">2026</option>
+        </select>
+          
+        <br />
+        <br />
+        
+        <label for="address1">Address 1:</label>
+
+        <br />
+
+        <input
+          type="text"
+          required="customer_id"
+          id="address"
+          name="address"
+        />
+        <br />
+        <br />
+        
+        <label for="address2">Address 2</label>
+        <br />
+        <input type="text" id="address" name="address" />
+        <br />
+        <br />
+        
+        <label for="address_city">City:</label>
+        <br />
+        <input type="text" id="address_city" name="address_city" />
+        <br />
+        <br />
+        
+        <label for="address_state">State:</label>
+        <br />
+        <input type="text" id="address_state" name="address_state" />
+        <br />
+        <br />
+        
+        <label for="address_zip">Zip Code:</label>
+        <br />
+        <input type="text" id="address_zip" name="address_zip" />
+        <br />
+        <br />
+
+        <input type="submit" value="Create Pay Method"/>
+        <br /> 
+      </form>
+    </div>
+
+    <h3>Search for Payment Method</h3>
+      
+      <div class="form-wrapper">
+
+        <h4> Search By Payment ID </h4>
+
+        <form class="search-by-form">
+
+          <input
+            type="text"
+            required="customer_id, payment_id"
+            id="search_payment_by_id"
+            name="search_payment_by_id"
+            value="Payment ID"
+          />
+        
+          <br>
+          <br>
+
+          <input type="submit" value="Search">
+          <br />
+    
+        </form>
+
+      <div class="sub-form-seperator"></div>
+
+        <h4> Search By Customer ID </h4>
+
+        <form class="search-by-form">
+          <input
+            type="text"
+            required="customer_id, payment_id"
+            id="search_payment_by_cust_id"
+            name="search_payment_by_cust_id"
+            value="Customer ID"
+          />
+        
+          <br>
+          <br>
+
+          <input type="submit" value="Search">
+          <br />
+        </form>
+
+        <div class="sub-form-seperator"> </div>
+
+        <h4> Search Results </h4>
+
+          <table class="query-output-table">
+
+            <thead>
+              <tr>
+                <th>Payment ID</th>
+                <th>Customer ID</th>
+                <th>Address ID</th>
+                <th>Card Type</th>
+                <th>Last 4 Digits</th>
+                <th>Expiration Date</th>
+                <th style="border:0;"> Options </th>
+              </tr>
+            
+            <tbody>
+              <tr> 
+                <td> 1234 </td>
+                <td> 2345 </td>
+                <td> 4567 </td> 
+                <td> VISA </td>
+                <td> 9876 </td>
+                <td> 2022/12/12</td>
+                <td class="query-update-options" style="border:0;"> 
+                  <form class="query-update-form">
+                    <button> View Orders </button>
+                    <br>
+                    <button> View Transactions </button>
+                  </form>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+    </div>
+
+</html>

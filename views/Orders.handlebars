@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <h2> Orders </h2>
+
+  <h3> Create Order </h3>
+
+    <div class="form-wrapper">
+      
+      <form class="insert-row-form">
+        <label for="new-order-cust-id"> Customer ID </label>
+        <br>
+        <input type="text" id="new-order-cust-id" name="new-order-cust-id">
+        <br>
+        <br>
+        <input type="submit" value="Select Customer">
+      </form>
+
+        <div class="sub-form-seperator"> </div>
+      <div class="insert-row-status-alert">
+        <p> [Customer Found? Show Customer Details. Else: Show "Invalid Customer ID"]</p>
+      </div>
+      <br>
+
+    <form class="insert-row-form" id="orderCreateForm">
+
+      <select type="select" id="newOrderPaymentSelector" name="newOrderPaymentSelector">
+        <option value="default"> -- Select Pay Method -- </option>
+        <option value="card1"> Card ending in 3812 - Exp. 04/22 </option>
+        <option value="card2"> Card ending in 8176 - Exp. 05/23 </option>
+        <option value="addNewPayMethod"> Add New Pay Method </option>
+      </select>
+
+      <script>
+        function detectNewPaymentMethod() {
+          var paymentSelector = document.getElementById("newOrderPaymentSelector");
+          if (addressSelector.value === "addNewPayMethod") {
+            window.location.href = "/html_interface/payment-methods.html";
+          };
+        }
+      </script>
+
+      <select type="select" id="newOrderAddressSelector" name="newOrderAddressSelector" onchange="detectNewOrderAddress()">
+        <option value="defaut">-- Select Address --</option>
+        <option value="address1">5178 NW Eastmore Dr. Portland OR 97128 </option>
+        <option value="address2">6137 SE Morland Ave. Beaverton OR 97005 </option>
+        <option value="addNewShippingAddress">Add New Shipping Address</option>
+      </select>
+
+      <script>
+        function detectNewOrderAddress() {
+          var addressSelector = document.getElementById("newOrderAddressSelector");
+          if (addressSelector.value === "addNewShippingAddress") {
+            window.location.href = "/html_interface/addresses.html";
+          };
+        }
+      </script>
+
+      <br>
+      <br>
+      
+      <input type="submit" value="Create Order">
+    </form>
+  </div>
+
+  <h3> Search Orders </h3>
+
+  <div class="form-wrapper">
+
+    <h4> Search By Order ID </h4>
+
+    <form class="search-by-form">
+      <input type="text" id="display-order-cust-id" name="display-order-cust-id" value="Order ID">
+      <br>
+      <br>
+      <input type="submit" value="Submit">
+    </form>
+
+    <div class="sub-form-seperator"> </div>
+
+    <h4> Search By Status/CustomerID </h4>
+    
+      <form class="search-by-form">
+        
+        <label for="search-by-status"> Search By: </label>
+        
+        <select type="select" id="search-by-status" name="search-by-status">
+          <option value="defaut">All</option>
+          <option value="open">Open</option>
+          <option value="active">Active</option>
+          <option value="processed">Processed</option>
+          <option value="packaged">Packaged</option>
+          <option value="shipped">Shipped</option>
+          <option value="closed">Closed</option>
+        </select>
+
+        <input type="checkbox" id="allow-search-by-cust-id" name="allow-search-by-cust-id">
+        
+        <input type="text" id="customer-id" name="customer-id" value="Customer ID" disabled>
+
+        <div class="search-sort-options">
+
+          <h5> Order By </h5>
+
+          <input type="checkbox" id="order-by-date" name="order-by-date" value="order_by_date">
+          <label for="order-by-date">Most Recent</label>
+
+          <input type="checkbox" id="order-by-customer-id" name="order-by-customer-id" value="order_by_customer_id">
+          <label for="order-by-customer-id">Item Count</label>
+
+        </div>
+
+        <input type="submit" value="Submit">
+
+      </form>
+
+    <h4> Search Results </h4>
+
+    <table class="query-output-table">
+
+      <thead>
+        <tr>
+          <th>Order ID</th>
+          <th>Customer ID</th>
+          <th>Customer Name</th>
+          <th>Transaction ID</th>
+          <th>Datetime Created</th>
+          <th style="border:0;"> Order Options</th>
+        </tr>
+      
+      <tbody>
+        <tr> 
+          <td> 1 </td>
+          <td> 2 </td>
+          <td> Chris Jacobs </td> 
+          <td> 56461 </td>
+          <td> 2021/12/12 12:13:59 </td>
+          <td class="query-update-options" style="border:0;"> 
+
+            <form class="query-update-form">
+              <select onchange="this.form.submit()" type="select" id="set-order-status" name="set-order-status" class="order-status-selector">
+                <option value="set-status" selected>Set Status</option>
+                <option value="open">Open</option>
+                <option value="active">Active</option>
+                <option value="processed">Processed</option>
+                <option value="packaged">Packaged</option>
+                <option value="shipped">Shipped</option>
+                <option value="closed">Closed</option>
+              </select>
+
+              <button class="order-edit-items-button" id="order-edit-items-button">Edit Items</button>
+              <br>
+              <button class="order-edit-shipments-button" id="order-edit-shipments-button">Edit Shipments</button>
+              
+
+            <br>
+            <br>
+
+            <button class="order-delete-button" id="order-delete-button">Cancel Order</button>
+          </td>
+        </tr>
+
+      </tbody>
+
+    </table>
+  </div>
+</html>
