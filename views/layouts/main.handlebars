@@ -3,11 +3,12 @@
 
 <head>
 	<title>Cook Nooks</title>
+    <link rel="stylesheet" href="/styles/main.css">
     <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
     {{#each jsscripts}}
-    <script src="/static/{{this}}"></script>
+        <script src="/static/{{this}}"></script>
     {{/each}}
-    <link rel="stylesheet" href="styles/main.css">
+    
 </head>
 
 <body>
@@ -15,7 +16,7 @@
 
     <nav>
       <ul>
-        <li> <a href="index.html"> Home Page </a> </li>
+        <li> <a href="/index.html"> Home Page </a> </li>
         |
         <li> <a href="/Customers">Customers</a> </li>
         |
