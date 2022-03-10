@@ -22,7 +22,7 @@ app.use('/static', express.static('public'));
 app.use('/', express.static('public'));
 
 app.use('/Customers', require('./Customers.js'));
-
+//app.use('/Customers/searchName', require('./Customers'))
 //app.use('/Addresses', require('./Addresses.js'));
 //app.use('/CustomerAddresses', require('./CustomerAddresses.js'));
 

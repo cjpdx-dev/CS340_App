@@ -33,15 +33,15 @@ module.exports = function() {
 
         let inserts = []
 
-        if (firstName !== null && lastName !== null) {
+        if (firstName && lastName) {
             sql = "SELECT * FROM Customers WHERE first_name = ? AND last_name = ?";
             inserts = [firstName, lastName];
         }
-        else if (firstName === null && lastName !== null) {
+        else if (!firstName && lastName) {
             sql = "SELECT * FROM Customers WHERE last_name = ?";
             inserts = [lastName];
         }
-        else if (lastName === null && firstName !== null) {
+        else if (!lastName && firstName) {
             sql = "SELECT * FROM Customers WHERE first_name = ?";
             inserts = [firstName];
         }
@@ -90,15 +90,16 @@ module.exports = function() {
         }
     })
 
-    router.get('/searchName/:searchFirstName/:searchLastName', function(req, res) {
-        console.log("Called router.get(Customers/:firstName/:lastName)")
-        console.log(req.body)
+    router.get('/searchName/', function(req, res) {
+        console.log("Called router.get(/seachName/");
+        
         let context = {};
+       
         context.jsscripts = ['search_customers.js'];
+        
         let mysql = req.app.get('mysql');
-
-        let firstName = req.body.searchFirstName;
-        let lastName = req.body.searchLastName;
+        let firstName = req.query.searchFirstName;
+        let lastName = req.query.searchLastName;
 
         console.log(firstName);
         console.log(lastName);
