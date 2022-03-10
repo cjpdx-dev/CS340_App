@@ -1,0 +1,115 @@
+<html>
+
+    <h2>Addresses</h2>
+
+    <h3>Create an Address</h3>
+
+    <div class="form-wrapper">
+
+        <form class="insert-row-form" id="insert-address" action="/Addresses" method="post">
+
+            <label for="customerID">*Customer ID</label>
+            <br />
+            <input type="text" id="customerID" name="customerID" required/>
+            <br />
+            <br>
+
+            <label for="firstName">*First Name</label>
+            <br />
+            <input type="text" id="firstName" name="firstName" required/>
+            <br />
+            <br>
+
+            <label for="lastName">*Last Name</label>
+            <br />
+            <input type="text" id="lastName" name="lastName" required/>
+            <br />
+            <br>
+
+            <label for="address1">*Address 1</label>
+            <br />
+            <input type="text" id="address1" name="address1" required/>
+            <br />
+            <br>
+
+            <label for="address2">Address 2</label>
+            <br />
+            <input type="text" id="address2" name="address2"/>
+            <br />
+            <br>
+
+            <label for="city">*City</label>
+            <br />
+            <input type="text" id="city" name="city" required/>
+            <br />
+            <br>
+
+            <label for="state">*State</label>
+            <br />
+            <input type="text" id="state" name="state" required/>
+            <br />
+            <br>
+
+            <label for="zipcode">*Zip Code</label>
+            <br />
+            <input type="text" id="zipcode" name="zipcode" required/>
+            <br />
+            <br />
+
+            <label for="country">*Country</label>
+            <br />
+            <input type="text" id="country" name="country" required/>
+            <br />
+            <br />
+
+            <input type="submit" value="Submit" /> <br /><br />
+        </form>
+    </div>
+
+    <h3> Search for Address </h3>
+
+    <div class="form-wrapper">
+
+        <form class="search-by-form">
+            <h4> Search By Address ID </h4>
+            <input type="number" id="searchAddressID" name="searchAddressID" placeholder="searchAddressID">
+            <br>
+            <br>
+            <input type="button" value="Search" onclick="searchAddressByID()"/> 
+        </form>
+
+        <table class="query-output-table">
+            <thead>
+                <tr>
+                    <th> Address ID </th>
+                    <th> First Name </th>
+                    <th> Last Name </th>
+                    <th> Address 1 </th>
+                    <th> Address 2 </th>
+                    <th> City </th>
+                    <th> State </th>
+                    <th> Zip Code </th>
+                    <th> Country </th>
+                </tr>
+            </thead>
+            
+            <tbody>
+                {{#each addresses}}
+                <tr> 
+                    <td> {{address_id}} </td>
+                    <td> {{first_name}} </td>
+                    <td> {{last_name}} </td>
+                    <td> {{address1}} </td>
+                    <td> {{address2}}</td>
+                    <td> {{city}} </td>
+                    <td> {{state}} </td>
+                    <td> {{zipcode}} </td>
+                    <td> {{country}} </td>
+                </tr>
+                {{/each}}
+            </tbody>
+        </table>
+
+    </div>
+
+</html>

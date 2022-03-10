@@ -2,6 +2,7 @@
 module.exports = function() {
     const express = require('express');
     const router = express.Router();
+    const logger = require('./Logger.js');
 
     function getCustomers(res, mysql, context, complete) {
         mysql.pool.query("SELECT * FROM Customers", function(error, results, fields){
@@ -62,7 +63,7 @@ module.exports = function() {
     }
 
     router.get('/', function(req, res) {
-        console.log("Called router.get(Customers/")
+        logger("router.get(/Customers/)", req); 
         console.log(req.params)
         let context = {};
         context.jsscripts = ['search_customers.js'];
@@ -74,13 +75,12 @@ module.exports = function() {
     })
 
     router.get('/searchId/:id', function(req, res) {
-        console.log("Called router.get(Customers/:id)")
-        
-        console.log(req.body)
+
+        logger("router.get(/Customers/searchId/:id)", req); 
         
         let context = {};
         context.jsscripts = ['search_customers.js'];
-        // context.jsscripts = ?
+
         let mysql = req.app.get('mysql');
         let id = req.params.id;
 
