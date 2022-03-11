@@ -23,7 +23,7 @@ app.use('/', express.static('public'));
 
 app.use('/Customers', require('./Customers.js'));
 app.use('/Addresses', require('./Addresses.js'));
-// app.use('/PayMethods', require('./PayMethods.js'));
+app.use('/PayMethods', require('./PayMethods.js'));
 
 // app.use('/Products', require('./Products.js'));
 // app.use('/ProductPrices', require('./ProductPrices.js'));

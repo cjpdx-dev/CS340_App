@@ -36,7 +36,7 @@ module.exports = function() {
         logger("router.get(/Addresses/)", req); 
 
         let context = {};
-        context.jsscripts = ['search_addresses.js'];
+        context.jsscripts = ['searchAddresses.js'];
 
         let mysql = req.app.get('mysql');
         getAddresses(res, mysql, context, complete);
@@ -51,7 +51,7 @@ module.exports = function() {
         logger("router.get(Addresses/searchAddressID/:id)", req); 
 
         let context = {};
-        context.jsscripts = ['search_addresses.js'];
+        context.jsscripts = ['searchAddresses.js'];
 
         let mysql = req.app.get('mysql');
         let id = req.params.id;
@@ -64,21 +64,20 @@ module.exports = function() {
     })
 
     router.post('/', function(req, res) {
+        logger("PUT Addresses/", req); 
+
         let mysql = req.app.get('mysql')
 
-        inserts = [ req.body.firstName, 
+        // Using a ternary operator here for address2 NULL/undefined
+        let inserts = [ req.body.firstName, 
                     req.body.lastName, 
                     req.body.address1,
-                    req.body.address2, 
+                    ( (!req.body.address2) ? 'NULL' : req.body.address2), 
                     req.body.city, 
                     req.body.state, 
                     req.body.zipcode, 
                     req.body.country
-                ];  
-
-        if (!req.body.address1) {
-            inserts[3] = "NULL"
-        } 
+                ];
         
         let sql = "INSERT INTO Addresses (first_name, last_name, address1, address2, city, state, zipcode, country) VALUES (?,?,?,?,?,?,?,?)";
 
