@@ -5,13 +5,21 @@
 
     <div class='form-wrapper'>
 
-      <form class='insert-row-form'  id="insert-pay-method" action="/PayMethods" method="post">
-      
+      <form>
         <label for="customerID">Customer ID</label>
         <br>
-        <input type="text" id="customerID" name="customerID" value="{{customer_id}}" required/>
+        <input 
+          type="text"  
+          id="inputCustomerID" 
+          name="inputCustomerID" 
+          onblur="validateCustomerID()" required/>
         <br />
         <br />
+      </form>
+      
+      <form class='insert-row-form'  id="insert-pay-method" action="/PayMethods" method="post">
+        
+        <input type"text" id="customerID" name="customerID" hidden>
 
         <label for="firstName">First Name</label>
         <br>
@@ -43,23 +51,27 @@
         <br />
         <br />
 
-        <select type="select" id="selectAddress" name="selectAddress" value="Select Address">
-          {{#each addresses}}
+        <select type="select" id="selectAddress" name="selectAddress" value="Select Address" onchange="onAddressSelectionChange()">
+          <option value="default"> Select Billing Address </option>
 
+          {{#each customerAddresses}}
+            <option value = {{id}}> {{address1}} {{address2}} {{city}} {{state}} {{zipcode}} {{country}}</option>
           {{/each}}
         </select>
         <br>
         <br>
-        
-        <label for="checkboxNewAddressFields">Create New Billing Address</label>
-        <input 
-          type="checkbox"  
-          id="checkboxNewAddressFields" 
-          name="checkboxNewAddressFields" 
-          onclick="toggleNewAddressFields()"
+        <input type="text" value="" id="addressID" hidden />
+
+        <label  for="checkboxNewAddressFields">Create New Billing Address</label>
+        <input  type="checkbox"  
+                id="checkboxNewAddressFields" 
+                name="checkboxNewAddressFields" 
+                onclick="toggleNewAddressFields()"
         /> 
         <br />
         <br />
+
+        
 
         <div class="newAddressFieldsContainer" id="newAddressFieldsContainer" hidden>
 
@@ -73,7 +85,7 @@
           
           <label for="address2">Address 2</label>
           <br />
-          <input type="text" id="address2" name="address2" />
+          <input type="text" id="address2" name="address2"/>
           <br />
           <br />
           
@@ -186,5 +198,7 @@
             </tbody>
           </table>
     </div>
+
+
 
 </html>

@@ -33,7 +33,7 @@ app.use('/Orders', require('./Orders.js'));
 // app.use('/Transactions', require('./Transactions.js'));
 
 // app.use('/CellNumbers', require('./CellNumbers.js'));
-// app.use('/CustomerAddresses', require('./CustomerAddresses.js'));
+app.use('/CustomerAddresses', require('./CustomerAddresses.js'));
 // app.use('/CustomerPayMethods', require('./CustomerPayMethods.js'));
 
 app.listen(app.get('port'), function()

@@ -1,4 +1,4 @@
-const { type } = require('express/lib/response');
+const { type, redirect } = require('express/lib/response');
 
 module.exports = function() {
     const express = require('express');
@@ -52,169 +52,134 @@ module.exports = function() {
         
     }
 
-router.get('/', function(req, res) {
-    logger("GET /PayMethods", req);
-    
-    let context = {};
-    context.jsscripts = ['searchPayMethods.js', 'createPayMethod.js', 'searchCustomerAddresses.js'];
-
-    let mysql = req.app.get('mysql');
-
-    getPayMethods(res, mysql, context, complete);
-
-    function complete() {
-        res.render('PayMethods', context)
-    }
-})
-
-router.get('/SearchPayMethodID/:id', function(req, res) {
-    logger("GET /PayMethods/SearchPayMethodID/:id)", req);
-
-    let context = {}
-    context.jsscripts = ['searchPayMethods.js', 'createPayMethod.js', 'searchCustomerAddresses.js'];
-
-    let mysql = req.app.get('mysql');
-    let id = req.params.id;
-
-    getPayMethodByID(id, res, mysql, context, complete);
-
-    function complete() {
-        res.render('PayMethods', context)
-    }
-})
-
-router.get('/SearchCustomerID/:customerID', function(req, res) {
-    
-    logger("GET PayMethods/SearchCustomerID/:customerID", req);
-    
-    let context = {}
-    context.jsscripts = ['searchPayMethods.js', 'createPayMethod.js', 'searchCustomerAddresses.js'];
-
-    let mysql = req.app.get('mysql');
-    let customerID = req.params.customerID;
-    
-    getPayMethodsByCustomerID(customerID, res, mysql, context, complete);
-
-    function complete() {
-        res.render('PayMethods', context)
-    }
-})
-
-router.post('/', function(req, res, next) {
-    logger("POST PayMethods/", req);
-
-    let mysql = req.app.get('mysql')
-
-    if (req.body.checkboxNewAddressFields) {
-        // CASE 1: We're using a new address for the billing address, we INSERT the new address,
-        // return address_id of that newly INSERTed address (research how to do this), then we call
-        // next()
-        console.log("Inserting new address")
-        let addressInserts = 
-        [ 
-            req.body.firstName, 
-            req.body.lastName, 
-            req.body.address1,
-            ( (!req.body.address2) ? "NULL" : req.body.address2), 
-            req.body.city, 
-            req.body.state, 
-            req.body.zipcode, 
-            req.body.country
-        ];
-
-        console.log("addressInserts: " + addressInserts);
+    function getCustomerAddresses(customerID, res, mysql, context, complete) {
         
-        // If any element in addressInserts is undefined, throw error
-        if(addressInserts.some(item => item === undefined)) {
-            res.write(JSON.stringify("Missing field for INSERT INTO Addresses"))
-            res.end();
-        }
-        // INSERT INTO Addresses, then return the address_id that was generated
-        let sql = "INSERT INTO Addresses (first_name, last_name, address1, address2, city, state, zipcode, country) VALUES (?, ?, ?, ?, ?, ?, ?, ?); SELECT LAST_INSERT_ID()"
+        inserts = [customerID]
+        sql =   "SELECT CustomerAddresses.id, Addresses.address1, Addresses.address2, Addresses.city, " + 
+                        "Addresses.state, Addresses.zipcode, Addresses.country " +
 
-        console.log(sql);
-
-        sql = mysql.pool.query(sql, addressInserts, function(error, results, fields) {
-            if(error) {
-                res.write(JSON.stringify(error))
-                res.end();
-            }
-
-            console.log(results[1][0]['LAST_INSERT_ID()']);
-            let addressID = results[1][0]['LAST_INSERT_ID()'];
-            res.locals.addressID = addressID;
-
-            let customerAddressInserts = [req.body.customerID, addressID];
-            let sql = "INSERT INTO CustomerAddresses (customer_id, address_id) VALUES (?,?)";
-            sql = mysql.pool.query(sql, customerAddressInserts, function(error, results, fields) {
-                if(error) {
-                    console.log("error")
+                "FROM CustomerAddresses JOIN Addresses ON CustomerAddresses.address_id = Addresses.address_id " + 
+                "WHERE CustomerAddresses.id = ?";
+        
+            mysql.pool.query(sql, inserts, function(error, results, fields){
+                if(error){
                     res.write(JSON.stringify(error));
                     res.end();
                 }
-                else {
-                    
-                    next();
-                } 
-            })
-        })
-    } else {
-
-        address_id = req.body.addressID;
-        next();
+                context.customerAddresses = results;
+                complete();
+            });
     }
 
-    }, (req, res, next) => {
-        console.log("next() Inserting PayMethod")
+    function postCustomerAddressWithAddressID(req, res, mysql, complete) {
+
+    }
+
+    router.get('/', function(req, res) {
+        logger("GET /PayMethods", req);
         
+        let context = {};
+        context.jsscripts = ['searchPayMethods.js', 'createPayMethod.js', 'searchCustomerAddresses.js'];
+
+        let mysql = req.app.get('mysql');
+
+        getPayMethods(res, mysql, context, complete);
+
+        function complete() {
+            res.render('PayMethods', context)
+        }
+    })
+
+    router.get('/GetCustomerAddresses/:customerID', function(req, res) {
+        logger("GET /GetCustomerAddresses/:customerID", req);
+        let context = {}
+        context.jsscripts = ['searchPayMethods.js', 'createPayMethod.js', 'searchCustomerAddresses.js'];
+
+        let mysql = req.app.get('mysql')
+        let customerID = req.params.customerID;
+
+        inserts = [customerID]
+        sql =   "SELECT CustomerAddresses.id, Addresses.address_id, Addresses.address1, Addresses.address2, Addresses.city, Addresses.state, Addresses.zipcode, Addresses.country " + 
+                "FROM CustomerAddresses JOIN Addresses ON CustomerAddresses.address_id = Addresses.address_id " + 
+                "WHERE CustomerAddresses.customer_id = ?;" 
+
+        sql = mysql.pool.query(sql, inserts, function(error, results, fields){
+            if(error){
+                res.write(JSON.stringify(error));
+                res.status(400); 
+                res.end(); 
+            } else{
+                console.log(JSON.stringify(results))
+                res.status(202).send(results);
+            }
+        })
+
+    })
+
+    router.get('/SearchPayMethodID/:id', function(req, res) {
+        logger("GET /PayMethods/SearchPayMethodID/:id)", req);
+
+        let context = {}
+        context.jsscripts = ['searchPayMethods.js', 'createPayMethod.js', 'searchCustomerAddresses.js'];
+
+        let mysql = req.app.get('mysql');
+        let id = req.params.id;
+
+        getPayMethodByID(id, res, mysql, context, complete);
+
+        function complete() {
+            res.render('PayMethods', context)
+        }
+    })
+
+    router.get('/CreateByCustomerID/:customerID', function(req, res) {
+        logger("GET /PayMethods/CreateByCustomerID/:customerID", req);
+
+        let context = {}
+        context.jsscripts = ['searchPayMethods.js', 'createPayMethod.js', 'searchCustomerAddresses.js'];
+
+        let mysql = req.app.get('mysql')
+        let customerID = req.params.customerID;
+
+        getCustomerAddresses(customerID, res, mysql, context, complete);
+        
+        function complete() {
+            res.render('PayMethods', context)
+        }
+    })
+
+    router.get('/SearchCustomerID/:customerID', function(req, res) {
+        
+        logger("GET PayMethods/SearchCustomerID/:customerID", req);
+        
+        let context = {}
+        context.jsscripts = ['searchPayMethods.js', 'createPayMethod.js', 'searchCustomerAddresses.js'];
+
+        let mysql = req.app.get('mysql');
+        let customerID = req.params.customerID;
+        
+        getPayMethodsByCustomerID(customerID, res, mysql, context, complete);
+
+        function complete() {
+            res.render('PayMethods', context)
+        }
+    })
+
+    router.post('/', function(req, res, next) {
+        logger("POST PayMethods/", req);
+
         let mysql = req.app.get('mysql')
 
-        let payMethodInserts = 
-        [
-            res.locals.addressID,
-            req.body.cardType,
-            req.body.lastFourDigits,
-            req.body.expirationDate 
-        ];
-
-        if(payMethodInserts.some(item => item === undefined)) {
-            res.write(JSON.stringify("Missing field for INSERT INTO Addresses"))
-            res.end();
+        if(req.body.selectAddress) {
+            if(req.body.selectAddress != "default"){
+                postCustomerAddressWithAddressID(req, res, mysql, complete)
+                function complete() {
+                    redirect('PayMethods');
+                }
+            }
         }
 
-        let sql =   "INSERT INTO PayMethods (address_id, card_type, last_four_digits, expiration_date) " + 
-                    "VALUES (?,?,?,?); SELECT LAST_INSERT_ID();"
 
-        sql = mysql.pool.query(sql, payMethodInserts, function(error, results, fields) {
-            if(error) {
-                res.write(JSON.stringify(error));
-                res.end();
-            } else {
-                res.locals.payMethodID = results[1][0]['LAST_INSERT_ID()'];
-                next();
-            }
-        })
-
-
-    }, (req, res, next) => {
-
-        console.log("next() Inserting CustomerPayMethod")
-
-        let mysql = req.app.get('mysql')
-
-        let customerPayMethodInserts = [req.body.customerID, res.locals.payMethodID];
-
-        let sql = "INSERT INTO CustomerPayMethods (customer_id, pay_method_id) VALUES (?,?)";
-
-        sql = mysql.pool.query(sql, customerPayMethodInserts, function(error, results, fields) {
-            if(error) {
-                res.write(JSON.stringify(error));
-                res.end();
-            } else {
-                res.redirect('/PayMethods')
-            }
-        })
-    })
         
     return router;
 }();
