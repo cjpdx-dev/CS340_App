@@ -17,44 +17,25 @@
       </form>
 
         <div class="sub-form-seperator"> </div>
-      <div class="insert-row-status-alert">
-        <p> [Customer Found? Show Customer Details. Else: Show "Invalid Customer ID"]</p>
-      </div>
       <br>
 
     <form class="insert-row-form" id="orderCreateForm">
 
       <select type="select" id="newOrderPaymentSelector" name="newOrderPaymentSelector">
         <option value="default"> -- Select Pay Method -- </option>
-        <option value="card1"> Card ending in 3812 - Exp. 04/22 </option>
-        <option value="card2"> Card ending in 8176 - Exp. 05/23 </option>
-        <option value="addNewPayMethod"> Add New Pay Method </option>
+        {{#each paymethods}}
+          <option value="{{pay_method_id}}"> Card ending in: {{last_four_digits}} {{expiration_date}} </option>
+        {{/each}}
       </select>
 
-      <script>
+      {{!-- <script>
         function detectNewPaymentMethod() {
           var paymentSelector = document.getElementById("newOrderPaymentSelector");
           if (addressSelector.value === "addNewPayMethod") {
             window.location.href = "/html_interface/payment-methods.html";
           };
         }
-      </script>
-
-      <select type="select" id="newOrderAddressSelector" name="newOrderAddressSelector" onchange="detectNewOrderAddress()">
-        <option value="defaut">-- Select Address --</option>
-        <option value="address1">5178 NW Eastmore Dr. Portland OR 97128 </option>
-        <option value="address2">6137 SE Morland Ave. Beaverton OR 97005 </option>
-        <option value="addNewShippingAddress">Add New Shipping Address</option>
-      </select>
-
-      <script>
-        function detectNewOrderAddress() {
-          var addressSelector = document.getElementById("newOrderAddressSelector");
-          if (addressSelector.value === "addNewShippingAddress") {
-            window.location.href = "/html_interface/addresses.html";
-          };
-        }
-      </script>
+      </script> --}}
 
       <br>
       <br>

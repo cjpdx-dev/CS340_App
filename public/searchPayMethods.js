@@ -1,9 +1,9 @@
 function searchPayMethodByID() {
     let payMethodID = document.getElementById('searchPayMethodID').value
-    window.location = '/PayMethods/SearchPayMethodID/' + encodeURI(payMethodID)
+    window.location = '/PayMethods/SearchByPayMethodID/' + encodeURI(payMethodID)
 }
 
 function searchPayMethodsByCustomerID() {
     let customerID = document.getElementById('searchCustomerID').value
-    window.location = '/PayMethods/SearchCustomerID/' + encodeURI(customerID) 
+    window.location = '/PayMethods/SearchByCustomerID/' + encodeURI(customerID) 
 }

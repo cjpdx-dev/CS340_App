@@ -4,7 +4,6 @@ module.exports = function() {
     const router = express.Router();
     const logger = require('./Logger.js');
     
-
     function getAddresses(res, mysql, context, complete) {
         mysql.pool.query("SELECT * FROM Addresses", function(error, results, fields){
             if(error){
