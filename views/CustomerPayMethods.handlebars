@@ -1,42 +1,48 @@
 <html>
 
- <h2> Customer Pay Methods </h2> 
+    <h2> Customer Pay Methods </h2> 
 
     <h3> View Pay Methods </h3>
 
     <div class="form-wrapper">
 
-        <label for="customer-id-label">Customer ID</label>
+        <label for="orderitems-id-label">Customer ID</label>
         <br>
-        <input type=text id="customer-id" name="customer-id" value="{{customer_id}}">
+        <input type=text id="orderitems-id-label" name="orderitems-id-label" value="">
         <br>
 
-        <table class="query-output-table">
+                <table class="query-output-table">
 
         <thead>
             <tr>
-            <th>Payment ID</th>
-            <th>Address ID</th>
-            <th>Card Type</th>
-            <th>Last 4 Digits</th>
-            <th>Expiration Date</th>
+                <th>Payment ID</th>
+                <th>Address ID</th>
+                <th>Card Type</th>
+                <th>Last 4 Digits</th>
+                <th>Expiration Date</th>
+                <th style="border:0;"> Options </th>
             </tr>
-        </thead>
         
         <tbody>
-            {{#each CustomerPayMethod}}
-                <tr> 
-                    <td> {{payment_id}} </td>
-                    <td> {{address_id}} </td> 
-                    <td> {{card_type}} </td>
-                    <td> {{last_four_digits}} </td>
-                    <td> {{expiration_date}}</td>
-                </tr>
+            {{#each customerPayMethod}}
+            <tr> 
+                <td> {{payment_id}} </td>
+                <td> {{address_id}} </td> 
+                <td> {{first_name}} </td>
+                <td> {{last_name}} </td>
+                <td> {{card_type}}</td>
+                <td> {{last_four_digits}}</td>
+                <td> {{expiration_date}} </td> 
+                <td class="query-update-options" style="border:0;"> 
+                    <form class="query-update-form">
+                    <button> Remove Payment Method </button>
+                    </form>
+                </td>
+            </tr>
             {{/each}}
         </tbody>
-        
+
         </table>
-    
     </div>
     
 </html>

@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <h2>Cell Numbers</h2>
+
+    <h3>Create Cell Number</h3>
+
+    <div class="form-wrapper">
+
+      <form class="insert-row-form" id="insert_cell_number" action="/CellNumbers" method="post">
+
+        <label for="customerID">{{customer_id}}</label> 
+        <br>
+        <input type="text" id="customerID" name="customerID"> 
+        <br>
+        <br>
+
+        <input type="submit" value="Create Cell Number">
+      </form>
+    </div>
+
+    <h3>Cell Number Search</h3>
+
+    <div class="form-wrapper">
+
+      <h4> Search By Cell Number </h4>
+
+      <form class="search-by-form">
+        <input type="number" id="search_customer_id" name="search_customer_id" value="" placeholder="Customer ID">
+        <br>
+        <br>
+        <input type="button" value="Search ID", onclick="searchCustomerByID()">
+      </form>
+
+      <h4> Search Results </h4>
+
+        <table class="query-output-table">
+
+          <thead>
+            <tr>
+              <th>Cell ID</th>
+              <th>Customer ID</th>
+              <th>Name</th>
+              <th>Cell Number</th>
+              <th style="border:0;"> Options </th>
+            </tr>
+          
+          <tbody>
+            {{#each cellNumbers}}
+            <tr> 
+                <td>{{cell_id}}</td> 
+                <td>{{customer_id}}</td> 
+                <td>{{first_name}} {{last_name}}</td> 
+                <td>{{cell_number}}</td>
+                <td class="query-update-options" style="border:0;"> 
+                    <div class="query-update-form">
+                        <button> Delete Cell Number </button>
+                    </div>
+                </td>
+            </tr>
+            {{/each}} 
+          </tbody>
+        </table>
+
+    </div>
+    
+</html>

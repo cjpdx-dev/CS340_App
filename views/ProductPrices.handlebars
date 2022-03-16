@@ -1,0 +1,49 @@
+      <h2>Item Prices</h2>
+
+      <h3> Select Item Prices </h3>
+
+      <div class="form-wrapper">
+
+        <form class="search-by-form">
+          <input type="text" id="search-input" name="search-input" value="Product ID">
+          <br>
+          <br>
+          <input type="submit" value="Submit">
+        </form>
+  
+        <table class="query-output-table">
+          <thead>
+            <tr>
+              <th>PriceID</th>
+              <th>Price</th>
+              <th>Date Active</th>
+              <th>Date Inactive</th>
+            </tr>
+          </thead>
+  
+          <tbody>
+            <tr>
+              <td>{{price_id}}</td>
+              <td>{{price}}</td>
+              <td>{{date_active}}</td>
+              <td>{{date_inactive}}</td>
+            </tr>
+
+          </tbody>
+
+        </table>
+
+      </div>
+        
+    <div class="form-wrapper">
+
+        <h4> Update Price </h4>
+
+        <form class="insert-row-form">
+          <input type="text" id="item-price-set-new" name="item-price-set-new" value="New Price">
+          <br>
+          <br>
+          <input type="submit" value="Save Price">
+        </form>
+
+    </div>

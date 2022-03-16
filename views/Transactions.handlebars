@@ -1,0 +1,69 @@
+<html>
+      <h2> Transactions </h2>
+
+      <h3> View Transaction(s)</h3>
+
+      <div class="form-wrapper">
+        <form class="search-by-form">
+          <h4>By Transaction ID</h4>
+          <input type="text" id="search-transaction-id" name="search-transaction-id">
+          <br>
+          <br>
+          <input type="submit" value="Submit">
+        </form>
+
+        <div class="sub-form-seperator" />
+
+        <form class="search-by-form">
+          <h4>By Payment ID</h4>
+          <input type="text" id="search-transaction-pay-id" name="search-transaction-pay-id">
+          <br>
+          <br>
+          <input type="submit" value="Submit">
+        </form>
+
+        <div class="sub-form-seperator" />
+
+          <h4> Search Results </h4>
+
+            <table class="query-output-table">
+
+              <thead>
+                <tr>
+                  <th>Transaction ID</th>
+                  <th>Order ID</th>
+                  <th>Pay Method ID</th>
+                  <th>Amount Paid</th>
+                  <th>Datetime Charged</th>
+                  <th>Confirmation Code</th>
+                  <th>Checksum</th>
+                  <th>Datetime Success</th>
+                  <th style="border:0;"> Options </th>
+                </tr>
+              
+              <tbody>
+                <tr> 
+                  <td> 1234 </td>
+                  <td> 2345 </td>
+                  <td> 3456 </td> 
+                  <td> $12.99 </td>
+                  <td> 2021/11/27 12:12:12 </td>
+                  <td> 98187384928 </td>
+                  <td> F9J9D48J83J </td>
+                  <td> 2021/11/27 12:12:18 </td>
+                  <td class="query-update-options" style="border:0;"> 
+
+                    <form class="query-update-form">
+                      <button> View Order </button>
+                      <br>
+                      <button> View Pay Method </button>
+                    </form>
+
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+
+      </div>
+
+</html>

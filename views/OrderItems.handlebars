@@ -1,0 +1,123 @@
+
+<h2> Order Items </h2> 
+
+<h3> View Order Items </h3>
+
+<div class="form-wrapper">
+
+    <label for="orderitems-id-label">Order ID</label>
+
+    <br>
+
+    <input type=text id="orderitems-id-label" name="orderitems-id-label" value="" disabled>
+    
+    <br>
+
+    <table class="query-output-table">
+    <thead>
+        <tr>
+        <th> Item ID </th>
+        <th> Item Name </th>
+        <th> Item Color </th>
+        <th> Qty </th>
+        <th> Cost Per Unit </th>
+        <th> Subtotal </th>
+        <th style="border:0;"></th>
+        </tr>
+    </thead>
+    
+    <tbody>
+        <tr>
+        <td> 1246 </td>
+        <td> Spatula </td>
+        <td> Silver </td>
+        <td> 2 </td>
+        <td> $12.99 </td>
+        <td> $25.98 </td> 
+
+        <td>
+            <div class="query-update-options">
+            <form class="query-update-form">
+                <button>Edit</button>
+                <br>
+                <button style="color: red;">Remove</button>
+            </form>
+            </div>
+        </td> 
+
+        </tr>
+
+        <tr>
+        <td> 1289 </td>
+        <td> Cookbook 1 </td>
+        <td> Red </td>
+        <td> 1 </td>
+        <td> $21.99 </td>
+        <td> $21.99 </td> 
+
+        <td>
+            <div class="query-update-options">
+            <form class="query-update-form">
+                <button>Edit</button>
+                <br>
+                <button style="color: red;">Remove</button>
+            </form>
+            </div>
+        </td> 
+
+        </tr>
+        
+    </tbody>
+    </table>
+
+    <h4> Finalize Order </h4>
+
+    <select type="select" id="newOrderPaymentSelector" name="newOrderPaymentSelector">
+    <option value="default"> -- Select Pay Method -- </option>
+    {{#each paymethods}}
+        <option value="{{pay_method_id}}"> Card ending in: {{last_four_digits}} {{expiration_date}} </option>
+    {{/each}}
+    </select>
+
+    <br>
+    <br>
+    <button> Submit Order </button>
+    <br>
+
+
+</div>
+
+<h3> Add Order Item </h3>
+
+<div class="form-wrapper">
+    <form class="orderitem-add-item-form" id="orderitem-add-item-form"> 
+
+    <label for="select-item-by-id">Product ID: </label>
+    <input type="text" style="width: 10%; " id="select-item-by-id" name="select-item-by-id"> 
+
+    <select onchange="" type="select" id="select-item-name" name="select-item-name" class="orderitem-item-selector">
+        <option value="default" selected>Name</option>
+        <option value="1246">Spatula</option>
+        <option value="1289"> Cookbook 1</option>
+    </select>
+
+    <select onchange="" type="select" id="select-item-color" name="select-item-color" class="orderitem-item-selector" disabled>
+        <option value="default" selected>Color</option>
+        <option value="silver">Silver</option>
+    </select>
+
+    <input type="number" id="select-item-qty" name="select-item-qty" class="orderitem-item-qty-input" disabled>
+    
+    <label for="orderitem-price-per-unit">Price Per Unit: </label>
+    <span style="display: inline; margin-right: 2%;" id="orderitem-price-per-unit">$12.99</span>
+    
+    <label for="orderitem-subtotal">Subtotal: </label>
+    <span style="display: inline;" id="orderitem-subtotal">$25.98</span>
+    
+    <br>
+    <br>
+    
+    <button style="float: left;"> Add To Order </button> 
+    
+    </form>
+</div>

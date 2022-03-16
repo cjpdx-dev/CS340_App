@@ -1,0 +1,139 @@
+    <h2> Products </h2>
+
+    <h3> Create Product </h3>
+
+    <div class="form-wrapper">
+    
+    <form class="insert-row-form" id="insert_product" action="/Products" method="post">
+        
+        <label for="product_name"> Name: </label>
+        <br>
+        <input type="text" id="product_name" name="product_name" required>
+
+        <br>
+        <br>
+
+        <label for="color"> Color: </label>
+        <br>
+        <input type="text" id="color" name="color">
+
+        <br>
+        <br>
+
+        <label for="volume_cubic_inches"> Cubic Inches: </label>
+        <br>
+        <input type="text" id="volume_cubic_inches" name="volume_cubic_inches">
+
+        <br>
+        <br>
+
+        <label for="weight_lbs"> Weight (lbs): </label>
+        <br>
+        <input type="text" id="weight_lbs" name="weight_lbs">
+
+        <br>
+        <br>
+
+        <label for="price"> Price: </label>
+        <br>
+        <input type="text" id="price" name="price">
+
+        <br>
+        <br>
+
+        <label for="in_stock_qty"> Stock Quantity: </label>
+        <br>
+        <input type="text" id="in_stock_qty" name="in_stock_qty">
+
+        <br>
+        <br>
+
+        <label for="reorder_at_qty"> Reorder Quantity: </label>
+        <br>
+        <input type="text" id="reorder_at_qty" name="reorder_at_qty">
+
+        <br>
+        <br>
+
+        <input type="submit" value="Create Product">
+    </form>
+    </div>
+
+    <h3> Select and Edit Products </h3>
+    
+    <div class="form-wrapper"> 
+    <form class="search-by-form" >
+
+        <input type="radio", id="productSelectById", name="productSelectById" value="productSelectById">
+        <label for="productSelectById"> By ID </label> 
+
+        <input type="radio", id="productSelectByName", name="productSelectByName" value="productSelectByName">
+        <label for="productSelectByName"> By Name </label>
+
+        <input type="radio", id="productSelectAll", name="productSelectAll" value="productSelectAll">
+        <label for="productSelectAll"> All Products </label> 
+
+        <br>
+        <br>
+
+        <input type="text" id="productSearchValue" name="productSearchValue" value="ID or Product Name">
+        <br> 
+        <br>
+
+        <div class="products-search-sort-options">
+            <h5> Order By </h5>
+
+            <input type="checkbox" id="orderProductsByStock" name="orderProductsByStock" value="orderProductsByStock">
+            <label for="order-by-date">Stock</label>
+
+            <input type="checkbox" id="orderProductsByPrice" name="orderProductsByPrice" value="orderProductsByPrice">
+            <label for="orderProductsByPrice">Price</label>
+        </div>
+
+        <br>
+
+        <input type="submit" value="Search">
+
+    </form>
+
+    <table class="query-output-table">
+        <caption>Results</caption>
+
+        <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Color</th>
+        <th>Cubic Inches</th>
+        <th>Pounds</th>
+        <th>Price</th>
+        <th>In Stock</th>
+        <th>Reorder Quantity</th>
+        <th>Discontinued</th>
+        <th style="border:0;"> Options </th>
+
+        </tr>
+
+        {{#each products}}
+        <tr> 
+            <td>{{product_id}}</td>
+            <td>{{product_name}}</td>
+            <td>{{color}}</td>
+            <td>{{weight_lbs}}</td>
+            <td>{{volume_cubic_inches}}</td>
+            <td>{{price}}</td>
+            <td>{{in_stock_qty}}</td>
+            <td>{{reorder_at_qty}}</td>
+            <td>{{is_discontinued}}</td>
+
+            <td class="query-update-options" style="border:0;"> 
+                <form class="query-update-form">
+                <button> Edit </button>
+                <br>
+                <button> Discontinue </button>
+                </form>
+            </td>
+        </tr>
+        {{/each}}
+
+    </table>
+    </div>

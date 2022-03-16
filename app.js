@@ -21,20 +21,19 @@ app.use(bodyParser.urlencoded( { extended : true } ));
 app.use('/static', express.static('public'));
 app.use('/', express.static('public'));
 
-app.use('/Customers', require('./Customers.js'));
-app.use('/Addresses', require('./Addresses.js'));
-app.use('/PayMethods', require('./PayMethods.js'));
+app.use('/Customers', require('./routes/Customers.js'));
+app.use('/Addresses', require('./routes/Addresses.js'));
+app.use('/PayMethods', require('./routes/PayMethods.js'));
+app.use('/Products', require('./routes/Products.js'));
+app.use('/Orders', require('./routes/Orders.js'));
+app.use('/CellNumbers', require('./routes/CellNumbers.js'));
 
-// app.use('/Products', require('./Products.js'));
-// app.use('/ProductPrices', require('./ProductPrices.js'));
+app.use('/ProductPrices', require('./routes/ProductPrices.js'));
+app.use('/Transactions', require('./routes/Transactions.js'));
 
-app.use('/Orders', require('./Orders.js'));
-// app.use('/OrderItems', require('./OrderItems.js'));
-// app.use('/Transactions', require('./Transactions.js'));
-
-// app.use('/CellNumbers', require('./CellNumbers.js'));
-app.use('/CustomerAddresses', require('./CustomerAddresses.js'));
-// app.use('/CustomerPayMethods', require('./CustomerPayMethods.js'));
+app.use('/CustomerAddresses', require('./routes/CustomerAddresses.js'));
+app.use('/CustomerPayMethods', require('./routes/CustomerPayMethods.js'));
+app.use('/OrderItems', require('./routes/OrderItems.js'));
 
 app.listen(app.get('port'), function()
 {

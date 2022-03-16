@@ -1,45 +1,50 @@
-<!DOCTYPE html>
-<html lang="en">
+<html>
+        <h2> Customer Addresses </h2> 
 
-    <h2> Customer Addresses </h2> 
+        <h3> View Addresses </h3>
 
-    <h3> View Addresses </h3>
+        <div class="form-wrapper">
 
-    <div class="form-wrapper">
+          <label for="customer-id-label">Customer ID</label>
+          <br>
+          <input type=text id="customer-id-label" name="customer-id-label" value="">
+          <br>
 
-        <label for="customer-id-label">Customer ID</label>
-        <br>
-        <input type=text id="customer-id-label" name="customer-id-label" value="">
-        <br>
+        </div>
 
-        <table class="query-output-table">
+          <table class="query-output-table">
 
-        <thead>
-            <tr>
+            <thead>
+              <tr>
                 <th> Address ID </th>
-                <th> Name</th>
+                <th> Name </th>
                 <th> Address 1 </th>
                 <th> Address 2 </th>
                 <th> City </th>
                 <th> State </th>
                 <th> Zip Code </th>
                 <th> Country </th>
-            </tr>
-        
-        <tbody>
-            {{#each CustomerAddress}}
-            <tr> 
-                <td> {{address_id}} </td>
-                <td> {{first_name}} {{last_name}} </td>
-                <td> {{address1}} </td>
-                <td> {{address2}} </td>
-                <td> {{city}} </td>
-                <td> {{state}} </td>
-                <td> {{zipcode}} </td>
-                <td> {{country}} </td>
-            </tr>
-            {{/each}}
-        </tbody>
-        </table>
-    </div>
+                <th style="border:0;"> Options </th>
+              </tr>
+            
+            <tbody>
+                {{#each customerAddress}}
+                <tr> 
+                    <td> {{address_id}} </td>
+                    <td> {{first_name}} {{last_name}} </td>
+                    <td> {{address1}} </td>
+                    <td> {{address2}} </td>
+                    <td> {{city}} </td>
+                    <td> {{state}} </td>
+                    <td> {{zipcode}} </td>
+                    <td> {{country}} </td>
+                    <td class="query-update-options" style="border:0;"> 
+                    <form class="query-update-form">
+                        <button> Remove Address </button>
+                    </form>
+                    </td>
+                </tr>
+                {{/each}}
+            </tbody>
+          </table>
 </html>
