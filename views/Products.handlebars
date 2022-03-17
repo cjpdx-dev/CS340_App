@@ -61,32 +61,35 @@
 
     <h3> Select and Edit Products </h3>
     
+
     <div class="form-wrapper"> 
-    <form class="search-by-form" >
+    <form class="search-by-form" id="searchProducts" action="/Products/ProductSearch" method="get">
 
-        <input type="radio", id="productSelectById", name="productSelectById" value="productSelectById">
-        <label for="productSelectById"> By ID </label> 
 
-        <input type="radio", id="productSelectByName", name="productSelectByName" value="productSelectByName">
-        <label for="productSelectByName"> By Name </label>
-
-        <input type="radio", id="productSelectAll", name="productSelectAll" value="productSelectAll">
+        <input type="radio", id="productSelectAll", name="productSearchOptions" value="selectAll" checked>
         <label for="productSelectAll"> All Products </label> 
 
+        <input type="radio", id="productSelectById", name="productSearchOptions" value="selectById">
+        <label for="productSelectById"> By ID </label> 
+
+        <input type="radio", id="productSelectByName", name="productSearchOptions" value="selectByName">
+        <label for="productSelectByName"> By Name </label>
+
+
         <br>
         <br>
 
-        <input type="text" id="productSearchValue" name="productSearchValue" value="ID or Product Name">
+        <input type="text" id="productSearchValue" name="productSearchValue" placeholder="ID or Product Name">
         <br> 
         <br>
 
         <div class="products-search-sort-options">
             <h5> Order By </h5>
 
-            <input type="checkbox" id="orderProductsByStock" name="orderProductsByStock" value="orderProductsByStock">
+            <input type="checkbox" id="orderProductsByStock" name="orderProductsByStock" value="true">
             <label for="order-by-date">Stock</label>
 
-            <input type="checkbox" id="orderProductsByPrice" name="orderProductsByPrice" value="orderProductsByPrice">
+            <input type="checkbox" id="orderProductsByPrice" name="orderProductsByPrice" value="true">
             <label for="orderProductsByPrice">Price</label>
         </div>
 

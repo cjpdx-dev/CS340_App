@@ -6,7 +6,8 @@ module.exports = function() {
 
 
     function getAllProducts(req, res, mysql, context, complete) {
-        let sql = "SELECT * FROM Products;"
+        let sql = "SELECT * FROM Products "
+
         mysql.pool.query(sql, function(error, results, fields) {
             if(error) {
                 res.write(JSON.stringify(error));
@@ -17,10 +18,33 @@ module.exports = function() {
         })
     }
 
+    function searchAllProducts(req, res, mysql, context, complete) {
 
-    function getProductsByID(req, res, mysql, context, complete) {
-        let sql = "SELECT * FROM Products WHERE product_id = ?";
-        let inserts = [req.params.productId];
+        if (!req.query.orderProductsByStock && !req.query.orderProductsByPrice) {
+            sql = "SELECT * FROM Products";
+        } else if (req.query.orderProductsByStock && !req.query.orderProductsByPrice) {
+            sql = "SELECT * FROM Products ORDER BY in_stock_qty;"
+        } else if (req.query.orderProductsByPrice && !req.query.orderProductsByStock) {
+            sql = "SELECT * FROM Products ORDER BY price;"
+        } else {
+            sql = "SELECT * FROM Products ORDER BY price, in_stock_qty;"
+        }
+        console.log(sql)
+        mysql.pool.query(sql, function(error, results, fields){
+            if(error){
+                res.write(JSON.stringify(error));
+                res.end();
+            }
+            context.products = results;
+            complete();
+        });
+    }
+
+
+    function searchProductsByID(req, res, mysql, context, complete) {
+        
+        let sql = "SELECT * FROM Products WHERE product_id = ?"
+        let inserts = [req.query.productSearchValue];
         
         mysql.pool.query(sql, inserts, function(error, results, fields){
             if(error){
@@ -32,6 +56,27 @@ module.exports = function() {
         });
     }
 
+    function searchProductsByName(req, res, mysql, context, complete) {
+        let sql = ""
+        if (!req.query.orderProductsByStock && !req.query.orderProductsByPrice) {
+            sql = "SELECT * FROM Products WHERE product_name = ?";
+        } else if (req.query.orderProductsByStock && !req.query.orderProductsByPrice) {
+            sql = "SELECT * FROM Products WHERE product_name = ? ORDER BY in_stock_qty;"
+        } else {
+            sql = "SELECT * FROM Products WHERE product_name = ? ORDER BY price, in_stock_qty;"
+        }
+        console.log(sql)
+        let inserts = [req.query.productSearchValue];
+        
+        mysql.pool.query(sql, inserts, function(error, results, fields){
+            if(error){
+                res.write(JSON.stringify(error));
+                res.end();
+            }
+            context.products = results;
+            complete();
+        });
+    }
 
     router.get('/', function(req, res) {
 
@@ -46,21 +91,44 @@ module.exports = function() {
         }
     })
 
-    router.get('/:id', function(req, res) {
-        let context = {};
-        context.jsscripts = ['createProduct.js', 'searchProducts.js', 'productOptions.js'];
-        
-        getProductsByID(req, res, mysql, context, complete);
-        function complete() {
-            res.render('Products', context);
-        }
-    })
+    // router.get('/:id', function(req, res) {
+    //     let context = {};
+
+    //     context.jsscripts = ['createProduct.js', 'searchProducts.js', 'productOptions.js'];
+    //     getProductsByID(req, res, mysql, context, complete);
+    //     function complete() {
+    //         res.render('Products', context);
+    //     }
+    // })
 
 
     router.get('/ProductSearch/', function(req, res) {
+        logger("GET /Products/ProductSearch/", req);
+        
         let mysql = req.app.get('mysql');
-        let sql = "";
-        let inserts = [];
+
+        let context = {};
+        context.jsscripts = ['createProduct.js', 'searchProducts.js', 'productOptions.js'];
+
+        if (req.query.productSearchOptions) {
+
+            if (req.query.productSearchOptions === "selectAll") {
+                searchAllProducts(req, res, mysql, context, complete)
+            } else if (req.query.productSearchOptions === "selectById") {
+                searchProductsByID(req, res, mysql, context, complete)
+            } else if (req.query.productSearchOptions === "selectByName") {
+                searchProductsByName(req, res, mysql, context, complete)
+            } else {
+                /* pass */
+            }
+        }
+        else {
+            // Search all products by default if for some reason productSearchOptions didn't exist in req.body
+            searchAllProducts(req, res, mysql, context, complete)
+        }
+        function complete() {
+            res.render('Products', context);
+        }
     })
 
 
@@ -99,5 +167,7 @@ module.exports = function() {
     })
     
     });
+
     return router;
+
 }();
