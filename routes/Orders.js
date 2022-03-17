@@ -8,8 +8,7 @@ module.exports = function() {
     function getAllOrders()
     */
     function getAllOrders(req, res, mysql, context, complete) {
-        let sql =   "SELECT Orders.order_id, Customers.customer_id, Customers.first_name, Customers.last_name, Orders.when_created, " + 
-                    "Orders.order_status, Orders.is_closed, Orders.when_closed " +  
+        let sql =   "SELECT Orders.order_id, Customers.customer_id, Customers.first_name, Customers.last_name, Orders.when_created, Orders.order_status " +  
                     "FROM Orders JOIN Customers WHERE Orders.customer_id = Customers.customer_id";
         mysql.pool.query(sql, function(error, results, fields){
             if(error){
@@ -26,9 +25,9 @@ module.exports = function() {
     function getOrdersByID()
     */
     function getOrdersByID(req, res, mysql, context, complete) {
-        let sql =   "SELECT Orders.order_id, Customers.customer_id, Customers.first_name, Customers.last_name, Orders.when_created, " + 
-                    "Orders.order_status, Orders.is_closed, Orders.when_closed " +  
+        let sql =   "SELECT Orders.order_id, Customers.customer_id, Customers.first_name, Customers.last_name, Orders.when_created, Orders.order_status " +  
                     "FROM Orders JOIN Customers WHERE Orders.order_id = ? AND Orders.customer_id = Customers.customer_id ";
+        
         let inserts = [req.query.inputOrderId];
 
         mysql.pool.query(sql, inserts, function(error, results, fields){
@@ -91,9 +90,9 @@ module.exports = function() {
     router.post('/', function(req, res) {
         logger("POST Orders/", req);
         let mysql = req.app.get('mysql');
-        let sql = "INSERT INTO Orders (customer_id, when_created, order_status, is_closed) VALUES (?, ?, ?, ?)";
+        let sql = "INSERT INTO Orders (customer_id, when_created) VALUES (?, ?)";
         let order_datetime = new Date().toISOString().slice(0, 19).replace('T', ' ');
-        let inserts = [req.body.newOrderCustomerID, order_datetime, "OPEN", false, null];
+        let inserts = [req.body.newOrderCustomerID, order_datetime];
         
         sql = mysql.pool.query(sql, inserts, function(error, results, fields){
             if(error) {
@@ -101,10 +100,28 @@ module.exports = function() {
                 res.write(JSON.stringify(error));
                 res.end();
             } else {
-                res.redirect('/Orders');
+                let redirectAddress = "/OrderItems/CustomerID/" + inserts[0] +'/OrderID/' + results.insertId;
+                res.redirect(redirectAddress);
             }
         });
     });
+
+    router.delete('/DeleteOrder/:orderId', function(req, res) {
+        logger("DELETE Orders/DeleteOrder/:orderId", req);
+        let mysql = req.app.get('mysql');
+
+        let sql = "DELETE FROM Orders WHERE order_id = ?"
+        let inserts = [req.params.orderId];
+        sql = mysql.pool.query(sql, inserts, function(error, results, fields) {
+            if(error) {
+                console.log(JSON.stringify(error))
+                res.write(JSON.stringify(error));
+                res.end();
+            } else {
+                res.redirect('/Orders');
+            }
+        })
+    }) 
     
     return router;
 }();

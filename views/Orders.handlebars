@@ -84,6 +84,7 @@
         </tr>
       
       <tbody>
+        
         {{#each orders}}
         <tr> 
           <td> {{order_id}} </td>
@@ -92,10 +93,9 @@
           <td> {{when_created}}</td>
           <td> {{order_status}}</td> 
           <td class="query-update-options" style="border:0;"> 
-
-            <form class="query-update-form">
-              <select onchange="this.form.submit()" type="select" id="set-order-status" name="set-order-status" class="order-status-selector">
-                <option value="set-status" selected>Set Status</option>
+                            
+              <select onchange="onChangeSetStatus()" type="select" id="setOrderStatus" name="setOrderStatus" class="order-status-selector">
+                <option value="default" selected>Set Status</option>
                 <option value="open">Open</option>
                 <option value="active">Active</option>
                 <option value="processed">Processed</option>
@@ -103,15 +103,12 @@
                 <option value="shipped">Shipped</option>
                 <option value="closed">Closed</option>
               </select>
-
-              <button class="order-edit-items-button" id="order-edit-items-button">Edit Items</button>
               <br>
-              <button class="order-edit-shipments-button" id="order-edit-shipments-button">Edit Shipments</button>
-              
-            <br>
-            <br>
-
-            <button class="order-delete-button" id="order-delete-button">Cancel Order</button>
+              <br>
+              <button class="order-edit-items-button" id="editOrderItems" onclick="onClickEditOrderItems({{order_id}}, {{customer_id}})">Edit Items</button>
+              <br>
+              <br>
+              <button class="order-delete-button" id="deleteOrder" onclick="onClickDeleteOrder({{order_id}})">Delete Order</button>
           </td>
         </tr>
         {{/each}}

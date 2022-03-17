@@ -33,33 +33,17 @@
                   <th>Transaction ID</th>
                   <th>Order ID</th>
                   <th>Pay Method ID</th>
-                  <th>Amount Paid</th>
+                  <th>Total Charged</th>
                   <th>Datetime Charged</th>
-                  <th>Confirmation Code</th>
-                  <th>Checksum</th>
-                  <th>Datetime Success</th>
-                  <th style="border:0;"> Options </th>
                 </tr>
               
               <tbody>
                 <tr> 
-                  <td> 1234 </td>
-                  <td> 2345 </td>
-                  <td> 3456 </td> 
-                  <td> $12.99 </td>
-                  <td> 2021/11/27 12:12:12 </td>
-                  <td> 98187384928 </td>
-                  <td> F9J9D48J83J </td>
-                  <td> 2021/11/27 12:12:18 </td>
-                  <td class="query-update-options" style="border:0;"> 
-
-                    <form class="query-update-form">
-                      <button> View Order </button>
-                      <br>
-                      <button> View Pay Method </button>
-                    </form>
-
-                  </td>
+                  <td> {{transaction_id}} </td>
+                  <td> {{order_id}} </td>
+                  <td> {{pay_method_id}} </td> 
+                  <td> {{transaction_amount}} </td>
+                  <td> {{datetime_charged}} </td>
                 </tr>
               </tbody>
             </table>

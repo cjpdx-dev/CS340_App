@@ -52,9 +52,7 @@ CREATE TABLE Orders
     
     customer_id INT NOT NULL,
     when_created DATETIME NOT NULL,
-    order_status VARCHAR(45) NOT NULL,
-    is_closed TINYINT NOT NULL,
-    when_closed DATETIME,
+    order_status VARCHAR(45),
     
     CONSTRAINT `Orders_fk_customer_id`
         FOREIGN KEY (customer_id) REFERENCES Customers (customer_id)
@@ -62,6 +60,7 @@ CREATE TABLE Orders
         ON UPDATE RESTRICT
 
 ) ENGINE = InnoDB;
+
 
 -- --------------------------------------------------------------------------------------
 -- CREATE Products
@@ -79,6 +78,7 @@ CREATE TABLE Products
     is_discontinued TINYINT NOT NULL
 
 ) ENGINE = InnoDB;
+
 
 -- --------------------------------------------------------------------------------------
 -- CREATE OrderItems
@@ -122,6 +122,7 @@ CREATE TABLE Addresses
 
 ) ENGINE = InnoDB;
 
+
 -- --------------------------------------------------------------------------------------
 -- CREATE CustomerAddresses
 -- --------------------------------------------------------------------------------------
@@ -143,6 +144,7 @@ CREATE TABLE CustomerAddresses
         ON UPDATE RESTRICT
 
 ) ENGINE = InnoDB;
+
 
 -- --------------------------------------------------------------------------------------
 -- CREATE PayMethods
@@ -186,6 +188,7 @@ CREATE TABLE CustomerPayMethods
 
 ) ENGINE = InnoDB;
 
+
 -- --------------------------------------------------------------------------------------
 -- CREATE Transactions
 -- --------------------------------------------------------------------------------------
@@ -193,7 +196,7 @@ CREATE TABLE Transactions
 (
     transaction_id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
     
-    order_id INT NOT NULL,
+    order_id INT,
     pay_method_id INT NOT NULL,
     transaction_amount DECIMAL NOT NULL,
     datetime_charged DATETIME NOT NULL,
@@ -203,7 +206,7 @@ CREATE TABLE Transactions
     
     CONSTRAINT `Transaction_fk_order_id`
         FOREIGN KEY (order_id) REFERENCES Orders (order_id)
-        ON DELETE RESTRICT
+        ON DELETE SET NULL
         ON UPDATE RESTRICT,
     
     CONSTRAINT `Transaction_fk_pay_method_id`
@@ -213,6 +216,7 @@ CREATE TABLE Transactions
 
 ) ENGINE = InnoDB;
 
+
 -- --------------------------------------------------------------------------------------
 -- INSERT INTO Customers
 -- --------------------------------------------------------------------------------------
@@ -220,6 +224,7 @@ INSERT INTO Customers(first_name, last_name, date_of_birth, email_address)
 VALUES
     ("Chris", "Jacobs", "1988-11-27", "jacobsc2@oregonstate.edu"),
     ("Jane", "Johnson", "1992-12-28", "janejohnson@example.edu");
+
 
 -- --------------------------------------------------------------------------------------
 -- INSERT INTO Orders
