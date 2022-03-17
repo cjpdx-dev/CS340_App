@@ -7,10 +7,10 @@
 
     <div class="form-wrapper">
 
-      <form class="insert-row-form" id="orderCreateForm">
+      <form class="insert-row-form" id="orderCreateForm" action="/Orders" method="post">
           <label for="newOrderCustomerID"> Customer ID </label>
           <br>
-          <input type="text" id="newOrderCustomerID" name="newOrderCustomerID" onblur="createOrderByCustomerID()">
+          <input type="text" id="newOrderCustomerID" name="newOrderCustomerID" value="{{customer_id}}">
           <br>
           <br>
           <input type="submit" value="Create Order">
@@ -24,8 +24,8 @@
 
     <h4> Search By Order ID </h4>
 
-    <form class="search-by-form">
-      <input type="text" id="display-order-cust-id" name="display-order-cust-id" value="Order ID">
+    <form class="search-by-form" id="searchOrderID" action="/Orders/SearchOrderID/" method="get">
+      <input type="text" id="inputOrderId" name="inputOrderId" placeholder="Order ID">
       <br>
       <br>
       <input type="submit" value="Submit">
@@ -75,21 +75,22 @@
 
       <thead>
         <tr>
-          <th>Order ID</th>
-          <th>Customer ID</th>
-          <th>Customer Name</th>
-          <th>Transaction ID</th>
-          <th>Datetime Created</th>
+          <th> Order ID </th>
+          <th> Customer ID </th>
+          <th> Customer Name </th>
+          <th> Datetime Created </th>
+          <th> Order Status </th>
           <th style="border:0;"> Order Options</th>
         </tr>
       
       <tbody>
+        {{#each orders}}
         <tr> 
-          <td> 1 </td>
-          <td> 2 </td>
-          <td> Chris Jacobs </td> 
-          <td> 56461 </td>
-          <td> 2021/12/12 12:13:59 </td>
+          <td> {{order_id}} </td>
+          <td> {{customer_id}} </td>
+          <td> {{first_name}} {{last_name}} </td> 
+          <td> {{when_created}}</td>
+          <td> {{order_status}}</td> 
           <td class="query-update-options" style="border:0;"> 
 
             <form class="query-update-form">
@@ -107,13 +108,13 @@
               <br>
               <button class="order-edit-shipments-button" id="order-edit-shipments-button">Edit Shipments</button>
               
-
             <br>
             <br>
 
             <button class="order-delete-button" id="order-delete-button">Cancel Order</button>
           </td>
         </tr>
+        {{/each}}
 
       </tbody>
 

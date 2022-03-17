@@ -51,9 +51,8 @@ CREATE TABLE Orders
     order_id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
     
     customer_id INT NOT NULL,
-    transaction_id INT,
     when_created DATETIME NOT NULL,
-    when_processed DATETIME,
+    order_status VARCHAR(45) NOT NULL,
     is_closed TINYINT NOT NULL,
     when_closed DATETIME,
     
