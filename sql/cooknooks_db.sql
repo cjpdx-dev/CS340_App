@@ -86,10 +86,8 @@ CREATE TABLE Products
 CREATE TABLE OrderItems 
 (
     order_line_id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-    
     order_id INT NOT NULL,
     product_id INT NOT NULL,
-    product_qty INT NOT NULL,
     
     CONSTRAINT `OrderItem_fk_order_id`
         FOREIGN KEY (order_id) REFERENCES Orders (order_id)
@@ -353,34 +351,30 @@ VALUES
     ("tongs #1", "blue", 8.99, 2.8, 104.5, 10, 3, 0),
     ("tongs #2", "red", 9.99, 3.5, 125.7, 5, 3, 0);
 
-
 -- --------------------------------------------------------------------------------------
 -- INSERT INTO OrderItems
 -- --------------------------------------------------------------------------------------
-INSERT INTO OrderItems (order_id, product_id, product_qty)
+INSERT INTO OrderItems (order_id, product_id)
 SELECT  order_id,
-        product_id,
-        1 AS product_qty
+        product_id
 
 FROM    Orders, Products
 WHERE   Orders.order_id = 1 AND
         Products.product_id = 1;
 
 
-INSERT INTO OrderItems (order_id, product_id, product_qty)
+INSERT INTO OrderItems (order_id, product_id)
 SELECT  order_id,
-        product_id,
-        1 AS product_qty
+        product_id
 
 FROM    Orders, Products
 WHERE   Orders.order_id = 1 AND
         Products.product_id = 2;
 
 
-INSERT INTO OrderItems (order_id, product_id, product_qty)
+INSERT INTO OrderItems (order_id, product_id)
 SELECT  order_id,
-        product_id,
-        2 AS product_qty
+        product_id
 
 FROM    Orders, Products
 WHERE   Orders.order_id = 2 AND

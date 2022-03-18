@@ -8,5 +8,15 @@ module.exports = function() {
         res.render("Transactions", context)
     })
 
+    router.post('/CreateTransaction/:orderID/PaymentID/:payID', function(req, res) {
+        logger("POST Transactions/CreateTransaction/:orderID/PaymentID/:payID", req);
+        
+        context = {}
+
+        sql = "INSERT INTO Transactions "
+        
+        res.render('Transactions', context)
+    })
+
     return router;
 }();

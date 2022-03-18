@@ -5,7 +5,7 @@
 
     {{#unless orderItems}}
         {{#if alertMessage}}
-            <h4 style="margin-left: 1%;">{{alertMessage}}</h4> 
+            <h4 style="color: red; margin-left: 1%;">{{alertMessage}}</h4> 
         {{/if}}
     {{/unless}}
 
@@ -13,12 +13,12 @@
 
         <div style="display: inline;">
             <label for="orderItemsOrderId">Order ID</label>
-            <input type="number" id="orderItemsOrderId" name="orderItemsOrderId" value="" disabled>
+            <input type="number" id="orderItemsOrderId" name="orderItemsOrderId" value={{order_id}} disabled>
         </div>
 
         <div style="display: inline; margin-left: 1%;"> 
             <label for="orderItemsCustomerId"> Customer ID</label>
-            <input type="number" id="orderItemsCustomerId" name="orderItemsCustomerId" value="" disabled>
+            <input type="number" id="orderItemsCustomerId" name="orderItemsCustomerId" value={{customer_id}} disabled>
         </div> 
 
         <br>
@@ -49,9 +49,9 @@
                 <td>{{price}}</td>  
                 <td>
                     <div class="query-update-options">
-                    <form class="query-update-form">
-                        <button style="color: red;">Remove</button>
-                    </form>
+
+                    <button style="color: red;" onclick="onClickRemoveOrderItem({{order_line_id}})">Remove</button>
+
                     </div>
                 </td> 
             </tr>
@@ -59,47 +59,40 @@
         </tbody>
         </table>
 
-        <h4> Finalize Order </h4>
+        <h4> Add Order Item </h4>
 
+        <div class="orderitem-add-item-form" id="addOrderItems" style="padding-bottom: 1%;"> 
+
+            <select type="select" id="selectProduct" name="selectProduct" class="orderitem-item-selector">
+            
+                <option value="default" selected>Product Catalog</option>
+            
+                {{#each products}}
+                    <option value={{product_id}}>{{product_name}} Color: {{color}} Price Per Unit: ${{price}} In Stock: {{in_stock_qty}} </option>
+                {{/each}}
+            
+            </select>
+
+            <br>
+            <br>
+            
+            <button style="float: left; margin-bottom: 2%;" onclick="onClickAddToOrder()"> Add To Order </button> 
+        </div>
+    </div>
+
+    <div class="form-wrapper">
+    <h3> Finalize Order </h3>
+
+    <div id="finalizeOrder">
         <select type="select" id="orderItemsPaymentSelector" name="orderItemsPaymentSelector">
-            <option value="default"> -- Select Pay Method -- </option>
-            {{#each paymethods}}
-                <option value={{pay_method_id}}> Card ending in: {{last_four_digits}} {{expiration_date}} </option>
-            {{/each}}
+        <option value="default"> -- Select Pay Method -- </option>
+        {{#each paymethods}}
+            <option value={{pay_method_id}}> {{card_type}} Ending In: {{last_four_digits}} Expires: {{expiration_date}} </option>
+        {{/each}}
         </select>
 
         <br>
         <br>
         <button onclick="onClickSubmitOrder()"> Submit Order </button>
         <br>
-    </div>
-
-<h3> Add Order Item </h3>
-    <div class="form-wrapper">
-        <form class="orderitem-add-item-form" id="addOrderItemForm" style="padding-bottom: 1%;"> 
-
-            <select onchange="" type="select" id="select-item-name" name="select-item-name" class="orderitem-item-selector">
-                <option value="default" selected>Product Catalog</option>
-                {{#each products}}
-                    <option value={{product_id}}>{{product_name}}</option>
-                {{/each}}
-            </select>
-
-            <div style="display: inline; margin-right: 2%; margin-left: 2%;">
-                <label for="pricePerUnit">Price Per Unit: </label>
-                <span id="pricePerUnit">{{price}}</span>
-            </div>
-
-            <div style="display: inline; margin-right: 2%;">
-                <input style="margin-right: 2%;" type="number" id="itemQuantity" name="itemQuantity" class="orderitem-item-qty-input" placeholder="Quantity" onchange="onChangeProductQuantity()">
-                <label style="margin-right: 2%;" for="orderItemSubtotal">Subtotal: </label>
-                <span style="margin-right: 1%;" id="orderItemSubtotal">{{subtotal}}</span>
-            </div>
-
-            <br>
-            <br>
-            
-            <button style="float: left; margin-bottom: 2%;" onclick="onClickAddToOrder()"> Add To Order </button> 
-        
-        </form>
     </div>
