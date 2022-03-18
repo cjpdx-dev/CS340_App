@@ -48,7 +48,7 @@ module.exports = function() {
         logger("GET Orders/", req);
         let context = {};
         let mysql = req.app.get('mysql');
-        context.jsscripts = ['createOrder.js', 'searchOrders.js', 'orderOptions.js'];
+        context.jsscripts = ['orderOptions.js'];
         getAllOrders(req, res, mysql, context, complete)
         function complete() {
             res.render('Orders', context)
@@ -62,7 +62,7 @@ module.exports = function() {
     router.get('/SearchOrderID', function(req, res) {
         logger("GET Orders/SearchOrderID", req);
         let context = {};
-        context.jsscripts = ['createOrder.js', 'searchOrders.js', 'orderOptions.js'];
+        context.jsscripts = ['orderOptions.js'];
         let mysql = req.app.get('mysql');
         
         getOrdersByID(req, res, mysql, context, complete);
@@ -76,12 +76,12 @@ module.exports = function() {
     /*
 
     */
-    router.get('/OrderFilterSearch/', function(req, res) {
-        let mysql = req.app.get('mysql');
+    // router.get('/OrderFilterSearch/', function(req, res) {
+    //     let mysql = req.app.get('mysql');
 
-        let sql = "";
-        let inserts = [];
-    })
+    //     let sql = "";
+    //     let inserts = [];
+    // })
 
     
     /*
@@ -102,6 +102,31 @@ module.exports = function() {
             } else {
                 let redirectAddress = "/OrderItems/CustomerID/" + inserts[0] +'/OrderID/' + results.insertId;
                 res.redirect(redirectAddress);
+            }
+        });
+    });
+
+    router.put('/UpdateStatus/:orderStatus/OrderID/:orderId', function(req, res) {
+        logger("PUT Orders/UpdateStatus/:orderId", req);
+
+        if(!req.params.orderStatus || !req.params.orderId || req.params.orderStatus === "default"){
+            res.write(JSON.stringify("Update Status Was Missing Parameters"));
+            res.end();
+        }
+
+        // screen orderStatus for acceptable input
+
+        let mysql = req.app.get('mysql');
+        let sql = "UPDATE Orders SET Orders.order_status = ? WHERE Orders.order_id = ?;";
+
+        let inserts = [req.params.orderStatus, req.params.orderId];
+        sql = mysql.pool.query(sql, inserts, function(error, results, fields) {
+            if(error) {
+                console.log(JSON.stringify(error))
+                res.write(JSON.stringify(error));
+                res.end();
+            } else {
+                res.end();
             }
         });
     });

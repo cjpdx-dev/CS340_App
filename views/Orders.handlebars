@@ -87,15 +87,15 @@
         
         {{#each orders}}
         <tr> 
-          <td> {{order_id}} </td>
+          <td id="orderId"> {{order_id}} </td>
           <td> {{customer_id}} </td>
           <td> {{first_name}} {{last_name}} </td> 
           <td> {{when_created}}</td>
-          <td> {{order_status}}</td> 
+          <td> {{order_status}}</td>
           <td class="query-update-options" style="border:0;"> 
-                            
-              <select onchange="onChangeSetStatus()" type="select" id="setOrderStatus" name="setOrderStatus" class="order-status-selector">
-                <option value="default" selected>Set Status</option>
+
+              <select id="selectStatus" name="selectStatus" class="order-status-selector" onchange="onChangeOrderStatus({{order_id}})">
+                <option value="default">Set Status</option>
                 <option value="open">Open</option>
                 <option value="active">Active</option>
                 <option value="processed">Processed</option>
@@ -103,6 +103,7 @@
                 <option value="shipped">Shipped</option>
                 <option value="closed">Closed</option>
               </select>
+              
               <br>
               <br>
               <button class="order-edit-items-button" id="editOrderItems" onclick="onClickEditOrderItems({{order_id}}, {{customer_id}})">Edit Items</button>
@@ -112,6 +113,8 @@
           </td>
         </tr>
         {{/each}}
+
+
 
       </tbody>
 

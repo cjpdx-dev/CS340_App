@@ -17,6 +17,7 @@ module.exports = function() {
             complete();
         })
     }
+    
 
     function searchAllProducts(req, res, mysql, context, complete) {
 
@@ -83,7 +84,7 @@ module.exports = function() {
         let mysql = req.app.get('mysql');
 
         let context = {};
-        context.jsscripts = ['createProduct.js', 'searchProducts.js', 'productOptions.js'];
+        context.jsscripts = [];
         
         getAllProducts(req, res, mysql, context, complete);
         function complete() {
@@ -98,7 +99,7 @@ module.exports = function() {
         let mysql = req.app.get('mysql');
 
         let context = {};
-        context.jsscripts = ['createProduct.js', 'searchProducts.js', 'productOptions.js'];
+        context.jsscripts = [];
 
         if (req.query.productSearchOptions) {
 

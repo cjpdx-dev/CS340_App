@@ -2,15 +2,17 @@
         <h2> Customer Addresses </h2> 
 
         <h3> View Addresses </h3>
-
+        {{#unless customerID}}
+          <p style="color: red; margin-left: 1%;"> To View CustomerAddresses - Click "View Addresses" Button In Customers Page </p>
+        {{/unless}}
         <div class="form-wrapper">
 
-          <label for="customer-id-label">Customer ID</label>
-          <br>
-          <input type=text id="customer-id-label" name="customer-id-label" value="">
-          <br>
 
-        </div>
+          <label for="customerID">Customer ID</label>
+          <br>
+          
+          <input disabled type="text" id="customerID" name="customerID" placeholder={{customerID}}>
+          <br>
 
           <table class="query-output-table">
 
@@ -18,8 +20,7 @@
               <tr>
                 <th> Address ID </th>
                 <th> Name </th>
-                <th> Address 1 </th>
-                <th> Address 2 </th>
+                <th> Address </th>
                 <th> City </th>
                 <th> State </th>
                 <th> Zip Code </th>
@@ -28,23 +29,23 @@
               </tr>
             
             <tbody>
-                {{#each customerAddress}}
+                {{#each customerAddresses}}
                 <tr> 
                     <td> {{address_id}} </td>
                     <td> {{first_name}} {{last_name}} </td>
-                    <td> {{address1}} </td>
-                    <td> {{address2}} </td>
+                    <td> {{address1}} {{address2}} </td>
                     <td> {{city}} </td>
                     <td> {{state}} </td>
                     <td> {{zipcode}} </td>
                     <td> {{country}} </td>
+
                     <td class="query-update-options" style="border:0;"> 
-                    <form class="query-update-form">
-                        <button> Remove Address </button>
-                    </form>
+                      <button disabled> Remove Address </button>
                     </td>
+                    
                 </tr>
                 {{/each}}
             </tbody>
           </table>
+    </div>
 </html>

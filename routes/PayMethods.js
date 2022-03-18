@@ -95,7 +95,7 @@ module.exports = function() {
         logger("GET /PayMethods", req);
         
         let context = {};
-        context.jsscripts = ['searchPayMethods.js', 'createPayMethod.js', 'searchCustomerAddresses.js'];
+        context.jsscripts = ['searchPayMethods.js', 'createPayMethod.js'];
 
         let mysql = req.app.get('mysql');
 
@@ -113,7 +113,7 @@ module.exports = function() {
         let context = {}
         let mysql = req.app.get('mysql')
         
-        context.jsscripts = ['searchPayMethods.js', 'createPayMethod.js', 'searchCustomerAddresses.js'];
+        context.jsscripts = ['searchPayMethods.js', 'createPayMethod.js'];
         customerID = req.params.customerID
         getPayMethodsByCustomerID(customerID, res, mysql, context, complete)
         function complete(){
@@ -127,7 +127,7 @@ module.exports = function() {
         logger("GET /PayMethods/SearchPayMethodID/:id)", req);
 
         let context = {}
-        context.jsscripts = ['searchPayMethods.js', 'createPayMethod.js', 'searchCustomerAddresses.js'];
+        context.jsscripts = ['searchPayMethods.js', 'createPayMethod.js'];
 
         let mysql = req.app.get('mysql');
         let payMethodID = req.params.id;
@@ -144,7 +144,7 @@ module.exports = function() {
         logger("GET PayMethods/SearchCustomerID/:customerID", req);
         
         let context = {}
-        context.jsscripts = ['searchPayMethods.js', 'createPayMethod.js', 'searchCustomerAddresses.js'];
+        context.jsscripts = ['searchPayMethods.js', 'createPayMethod.js'];
 
         let mysql = req.app.get('mysql');
         let customerID = req.params.customerID;

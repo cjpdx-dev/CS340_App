@@ -7,18 +7,19 @@ module.exports = function() {
     function getCustomerPayMethods(customerID, res, mysql, context, complete) {
         
         inserts = [customerID]
-        sql =   "SELECT CustomerAddresses.id, Addresses.address_id, Addresses.address1, Addresses.address2, Addresses.city, Addresses.state, Addresses.zipcode, Addresses.country " +
+        sql =   "SELECT CustomerPayMethods.id, PayMethods.pay_method_id, PayMethods.card_type, PayMethods.last_four_digits, PayMethods.expiration_date " +
 
-                "FROM CustomerAddresses JOIN Addresses ON CustomerAddresses.address_id = Addresses.address_id " + 
+                "FROM CustomerPayMethods JOIN PayMethods ON CustomerPayMethods.pay_method_id = PayMethods.pay_method_id " + 
                 
-                "WHERE CustomerAddresses.customer_id = ?";
+                "WHERE CustomerPayMethods.customer_id = ?";
         
         mysql.pool.query(sql, inserts, function(error, results, fields){
             if(error){
                 res.write(JSON.stringify(error));
                 res.end();
             }
-            context.customerAddresses = results;
+            context.customerPayMethods = results;
+            context.customerID = customerID;
             complete();
         });
     }
@@ -29,7 +30,7 @@ module.exports = function() {
         logger("CustomerAddresses/", req);
 
         let context = {};
-        context.jsscripts = ['searchCustomerAddresses.js', 'createCustomerAddress']
+        context.jsscripts = []
 
         let mysql = req.app.get('mysql');
 
@@ -42,24 +43,17 @@ module.exports = function() {
         logger("/:customerID", req);
 
         let context = {}
-        context.jsscripts = ['searchCustomerAddresses.js', 'createCustomerAddress']
+        context.jsscripts = []
 
         let mysql = req.app.get('mysql');
         let customerID = req.params.customerID;
 
-        getCustomerAddresses(customerID, res, mysql, context, complete)
-
+        getCustomerPayMethods(customerID, res, mysql, context, complete)
         function complete() {
-            if(error){
-                res.write(JSON.stringify(error));
-                res.status(400);
-                res.end();
-            } else {
-                res.render('CustomerPayMethods', context)
-                // if GET from PayMethods (or another page), send results to that page with context
-                res.status(202).send(context.customerAddresses);
-            }
+            console.log(context)
+            res.render('CustomerPayMethods', context)
         }
+        
 
     })
 

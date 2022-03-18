@@ -83,7 +83,6 @@
               <th>Last Name</th>
               <th>Email</th>
               <th>Date of Birth</th>
-              <th>Cell Number</th>
               <th style="border:0;"> Options </th>
             </tr>
           
@@ -95,17 +94,12 @@
                 <td>{{last_name}}</td> 
                 <td>{{email_address}}</td>
                 <td>{{date_of_birth}}</td>
-                <td> n/a </td> 
                 <td class="query-update-options" style="border:0;"> 
                     <div class="query-update-form">
-                        <button> Create Order </button> 
-                        <!--
-                        <td><button onclick="deletePerson({{id}})">Delete</button></td>
-                        <td><a href="/people/{{id}}">Update</a></td>
-                        -->
-                        <button> View Orders </button>
-                        <button> View Payment Methods </button>
-                        <button> View Addresses </button>  
+                        <button disabled> Create Order </button> 
+                        <button disabled> View Orders </button>
+                        <button onclick="onClickShowCustomerPayMethods({{customer_id}})"> View Payment Methods </button>
+                        <button onclick="onClickShowCustomerAddresses({{customer_id}})"> View Addresses </button>  
                     </div>
                 </td>
             </tr>

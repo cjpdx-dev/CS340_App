@@ -66,7 +66,7 @@ module.exports = function() {
         logger("router.get(/Customers/)", req); 
         console.log(req.params)
         let context = {};
-        context.jsscripts = ['searchCustomers.js'];
+        context.jsscripts = ['searchCustomers.js', 'customerOptions.js'];
         let mysql = req.app.get('mysql');
         getCustomers(res, mysql, context, complete);
         function complete() {
@@ -79,7 +79,7 @@ module.exports = function() {
         logger("router.get(/Customers/searchId/:id)", req); 
         
         let context = {};
-        context.jsscripts = ['searchCustomers.js'];
+        context.jsscripts = ['searchCustomers.js', 'customerOptions.js'];
 
         let mysql = req.app.get('mysql');
         let id = req.params.id;

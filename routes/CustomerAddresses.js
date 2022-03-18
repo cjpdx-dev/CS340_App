@@ -19,6 +19,7 @@ module.exports = function() {
                 res.end();
             }
             context.customerAddresses = results;
+            context.customerID = customerID;
             complete();
         });
     }
@@ -29,7 +30,7 @@ module.exports = function() {
         logger("CustomerAddresses/", req);
 
         let context = {};
-        context.jsscripts = ['searchCustomerAddresses.js', 'createCustomerAddress']
+        context.jsscripts = []
         let mysql = req.app.get('mysql');
 
         res.render('CustomerAddresses', context)
@@ -41,7 +42,7 @@ module.exports = function() {
         logger("/:customerID", req);
 
         let context = {}
-        context.jsscripts = ['searchCustomerAddresses.js', 'createCustomerAddress']
+        context.jsscripts = []
 
         let mysql = req.app.get('mysql');
         let customerID = req.params.customerID;
@@ -49,15 +50,7 @@ module.exports = function() {
         getCustomerAddresses(customerID, res, mysql, context, complete)
 
         function complete() {
-            if(error){
-                res.write(JSON.stringify(error));
-                res.status(400);
-                res.end();
-            } else {
-                res.render('CustomerAddresses', context)
-                // if GET from PayMethods (or another page), send results to that page with context
-                res.status(202).send(context.customerAddresses);
-            }
+            res.render('CustomerAddresses', context)
         }
 
     })

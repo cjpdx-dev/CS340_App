@@ -4,19 +4,22 @@
 
     <h3> View Pay Methods </h3>
 
+    {{#unless customerID}}
+        <p style="color: red; margin-left: 1%;"> To View CustomerPayMethods - Click "View Pay Methods" Button In Customers Page </p>
+    {{/unless}}
+
     <div class="form-wrapper">
 
-        <label for="orderitems-id-label">Customer ID</label>
+        <label for="customerID">Customer ID</label>
         <br>
-        <input type=text id="orderitems-id-label" name="orderitems-id-label" value="">
+        <input disabled type="text" id="customerID" name="customerID" placeholder={{customerID}}>
         <br>
 
-                <table class="query-output-table">
+        <table class="query-output-table">
 
         <thead>
             <tr>
                 <th>Payment ID</th>
-                <th>Address ID</th>
                 <th>Card Type</th>
                 <th>Last 4 Digits</th>
                 <th>Expiration Date</th>
@@ -24,19 +27,16 @@
             </tr>
         
         <tbody>
-            {{#each customerPayMethod}}
+            {{#each customerPayMethods}}
             <tr> 
-                <td> {{payment_id}} </td>
-                <td> {{address_id}} </td> 
-                <td> {{first_name}} </td>
-                <td> {{last_name}} </td>
+                <td> {{pay_method_id}} </td>
                 <td> {{card_type}}</td>
                 <td> {{last_four_digits}}</td>
                 <td> {{expiration_date}} </td> 
                 <td class="query-update-options" style="border:0;"> 
-                    <form class="query-update-form">
-                    <button> Remove Payment Method </button>
-                    </form>
+
+                <button disabled> Remove Payment Method </button>
+
                 </td>
             </tr>
             {{/each}}

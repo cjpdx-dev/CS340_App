@@ -19,7 +19,8 @@ module.exports = function() {
             context.customerId = customerId;
 
             sql =   "SELECT PayMethods.pay_method_id, PayMethods.card_type, PayMethods.last_four_digits, PayMethods.expiration_date " +
-                    "FROM PayMethods JOIN CustomerPayMethods ON CustomerPayMethods.customer_id = ?"
+                    "FROM PayMethods JOIN CustomerPayMethods ON PayMethods.pay_method_id = CustomerPayMethods.pay_method_id " +
+                    "WHERE CustomerPayMethods.customer_id = ?"
             inserts = [customerId];
             mysql.pool.query(sql, inserts, function(error, results, fields){
                 if (error) {

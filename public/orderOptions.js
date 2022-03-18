@@ -11,3 +11,14 @@ function onClickDeleteOrder(orderId) {
         }
     })
 }
+
+function onChangeOrderStatus(orderId) {
+
+    $.ajax({
+        url: '/Orders/UpdateStatus/' + $("#selectStatus").val() + '/OrderID/' + orderId,
+        type: 'put',
+        success: function(result){
+            window.location.reload(true)
+        }
+    })
+}
