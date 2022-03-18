@@ -4,23 +4,21 @@
       <h3> View Transaction(s)</h3>
 
       <div class="form-wrapper">
-        <form class="search-by-form">
+
           <h4>By Transaction ID</h4>
-          <input type="text" id="search-transaction-id" name="search-transaction-id">
+          <input type="text" id="transactionID" name="transactionID" disabled>
           <br>
           <br>
-          <input type="submit" value="Submit">
-        </form>
+          <button style="margin-bottom: 1%;" type="submit" value="Submit" disabled> Search </button>
 
         <div class="sub-form-seperator" />
 
-        <form class="search-by-form">
+
           <h4>By Payment ID</h4>
-          <input type="text" id="search-transaction-pay-id" name="search-transaction-pay-id">
+          <input type="text" id="transactionPaymentID" name="transactionPaymentID">
           <br>
           <br>
-          <input type="submit" value="Submit">
-        </form>
+          <button value="Submit" style="margin-bottom: 1%;" onclick="onClickSearchByPayID()"> Search </button> 
 
         <div class="sub-form-seperator" />
 
@@ -38,6 +36,7 @@
                 </tr>
               
               <tbody>
+                {{#each transactions}}
                 <tr> 
                   <td> {{transaction_id}} </td>
                   <td> {{order_id}} </td>
@@ -45,6 +44,7 @@
                   <td> {{transaction_amount}} </td>
                   <td> {{datetime_charged}} </td>
                 </tr>
+                {{/each}}
               </tbody>
             </table>
 

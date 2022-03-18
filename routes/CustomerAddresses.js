@@ -30,7 +30,6 @@ module.exports = function() {
 
         let context = {};
         context.jsscripts = ['searchCustomerAddresses.js', 'createCustomerAddress']
-
         let mysql = req.app.get('mysql');
 
         res.render('CustomerAddresses', context)

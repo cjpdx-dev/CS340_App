@@ -91,16 +91,6 @@ module.exports = function() {
         }
     })
 
-    // router.get('/:id', function(req, res) {
-    //     let context = {};
-
-    //     context.jsscripts = ['createProduct.js', 'searchProducts.js', 'productOptions.js'];
-    //     getProductsByID(req, res, mysql, context, complete);
-    //     function complete() {
-    //         res.render('Products', context);
-    //     }
-    // })
-
 
     router.get('/ProductSearch/', function(req, res) {
         logger("GET /Products/ProductSearch/", req);
